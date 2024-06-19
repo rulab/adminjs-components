@@ -1,6 +1,9 @@
 {
   "name": "adminjs-components",
   "version": "0.0.1",
+  "main": "./dist/index.js",
+  "module": "./dist/index.сjs",
+  "types": "./dist/index.d.ts",
   "type": "module",
   "private": true,
   "scripts": {
