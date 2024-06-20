@@ -1,14 +1,17 @@
 {
-  "name": "adminjs-components",
-  "version": "0.0.1",
-  "main": "./dist/index.js",
-  "module": "./dist/index.сjs",
-  "types": "./dist/index.d.ts",
-  "type": "module",
-  "private": true,
+  "name": "@ru-lab/adminjs-components",
+  "version": "0.0.2",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "private": false,
+  "keywords": ["adminjs"],
+  "repository": {
+    "url": "https://github.com/rulab/adminjs-components"
+  },
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts",
-    "dev": "tsup src/index.ts --format cjs,esm --dts --watch"
+    "lint": "tsc"
   },
   "dependencies": {
     "@adminjs/design-system": "^4.1.1",
