@@ -29,7 +29,7 @@ dependencies:
 
 devDependencies:
   '@types/node':
-    specifier: ^20.11.24
+    specifier: ^20.14.2
     version: 20.14.2
   '@types/react':
     specifier: ^18.2.61
@@ -37,6 +37,9 @@ devDependencies:
   eslint:
     specifier: ^8.57.0
     version: 8.57.0
+  rollup-plugin-polyfill-node:
+    specifier: ^0.13.0
+    version: 0.13.0(rollup@4.18.0)
   tsup:
     specifier: ^8.1.0
     version: 8.1.0(typescript@5.4.5)
@@ -2303,7 +2306,6 @@ packages:
       estree-walker: 2.0.2
       magic-string: 0.30.10
       rollup: 4.18.0
-    dev: false
 
   /@rollup/plugin-json@6.1.0(rollup@4.18.0):
     resolution: {integrity: sha512-EGI2te5ENk1coGeADSIwZ7G2Q8CJS2sF120T7jLw4xFw9n7wIOXHo+kIYRAoVpJAN+kmqZSoO3Fp4JtoNF4ReA==}
@@ -2363,7 +2365,6 @@ packages:
       estree-walker: 2.0.2
       picomatch: 2.3.1
       rollup: 4.18.0
-    dev: false
 
   /@rollup/rollup-android-arm-eabi@4.18.0:
     resolution: {integrity: sha512-Tya6xypR10giZV1XzxmH5wr25VcZSncG0pZIjfePT0OVBvqNEurzValetGNarVrGiq66EBVAFn15iYX4w6FKgQ==}
@@ -3716,7 +3717,6 @@ packages:
 
   /estree-walker@2.0.2:
     resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
-    dev: false
 
   /esutils@2.0.3:
     resolution: {integrity: sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==}
@@ -4349,7 +4349,6 @@ packages:
     resolution: {integrity: sha512-iIRwTIf0QKV3UAnYK4PU8uiEc4SRh5jX0mwpIwETPpHdhVM4f53RSwS/vXvN1JhGX+Cs7B8qIq3d6AH49O5fAQ==}
     dependencies:
       '@jridgewell/sourcemap-codec': 1.4.15
-    dev: false
 
   /make-dir@2.1.0:
     resolution: {integrity: sha512-LS9X+dc8KLxXCb8dni79fLIIUA5VyZoyjSMCwTluaXA0o27cCK0bhXkpgw+sTXVpPy/lSO57ilRixqk0vDmtRA==}
@@ -5205,7 +5204,6 @@ packages:
     dependencies:
       '@rollup/plugin-inject': 5.0.5(rollup@4.18.0)
       rollup: 4.18.0
-    dev: false
 
   /rollup@4.18.0:
     resolution: {integrity: sha512-QmJz14PX3rzbJCN1SG4Xe/bAAX2a6NpCP8ab2vfu2GiUr8AQcr2nCV/oEO3yneFarB67zk8ShlIyWb2LGTb3Sg==}
