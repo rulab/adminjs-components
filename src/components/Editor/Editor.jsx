@@ -21,7 +21,7 @@ const Editor = ({ property, record, onChangeAdmin, editorId }) => {
       const editor = new EditorJS({
         holder: editorId,
         tools: EDITOR_TOOLS,
-        data: JSON.parse(record.params.editor),
+        data: JSON.parse(record.params[property.path]),
         async onChange(api, event) {
           const data = await api.saver.save();
           setJsonData(JSON.stringify(data));
