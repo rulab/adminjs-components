@@ -20,7 +20,6 @@ const Editor = ({ property, record, onChangeAdmin, editorId }) => {
     if (!ref.current) {
       const editor = new EditorJS({
         holder: editorId,
-
         tools: EDITOR_TOOLS,
         data: JSON.parse(record.params.editor),
         async onChange(api, event) {
@@ -32,9 +31,7 @@ const Editor = ({ property, record, onChangeAdmin, editorId }) => {
     }
 
     return () => {
-      if (ref.current && ref.current.destroy) {
-        ref.current.destroy();
-      }
+      ref?.current?.destroy?.();
     };
   }, []);
 
