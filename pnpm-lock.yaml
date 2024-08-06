@@ -29,6 +29,9 @@ dependencies:
   adminjs:
     specifier: ^7.8.1
     version: 7.8.1(@types/react@18.3.3)
+  editorjs-html:
+    specifier: ^3.4.3
+    version: 3.4.3
   react:
     specifier: ^18.2.0
     version: 18.3.1
@@ -3557,6 +3560,10 @@ packages:
   /eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
+
+  /editorjs-html@3.4.3:
+    resolution: {integrity: sha512-HMqQ3BCE98uhSpJsbfH0c3CoMctUMCHlap2Eq/7/VjaHas+g3IJqyf+ERtMByoQCzvcW22ISYaZEeE7rGkd8Xg==}
+    dev: false
 
   /electron-to-chromium@1.4.806:
     resolution: {integrity: sha512-nkoEX2QIB8kwCOtvtgwhXWy2IHVcOLQZu9Qo36uaGB835mdX/h8uLRlosL6QIhLVUnAiicXRW00PwaPZC74Nrg==}
