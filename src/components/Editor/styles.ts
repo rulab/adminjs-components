@@ -4,6 +4,7 @@ import { styled } from "@adminjs/design-system/styled-components";
 export const Label = styled.div`
   font-size: 12px;
   margin-bottom: 8px;
+  color: rgb(137, 138, 154);
 `;
 
 export const EditorWrapper = styled(Box)`
