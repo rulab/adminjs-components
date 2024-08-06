@@ -9,6 +9,7 @@ import { EDITOR_TOOLS } from "./config";
 
 const Editor = ({ property, record, onChangeAdmin, editorId }) => {
   const [jsonData, setJsonData] = useState();
+  const isSavedData = Boolean(record.params[property.path]);
 
   const ref = useRef();
 
@@ -21,7 +22,7 @@ const Editor = ({ property, record, onChangeAdmin, editorId }) => {
       const editor = new EditorJS({
         holder: editorId,
         tools: EDITOR_TOOLS,
-        data: JSON.parse(record.params[property.path]),
+        data: isSavedData ? JSON.parse(record.params[property.path]) : "",
         async onChange(api, event) {
           const data = await api.saver.save();
           setJsonData(JSON.stringify(data));

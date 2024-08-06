@@ -50,8 +50,10 @@ const CustomSlug: FC<CustomSlugTypes> = ({ property, record, onChange }) => {
 
   function generateSlug(e: SyntheticEvent<HTMLInputElement>) {
     e.preventDefault();
-    const title = record.title;
-    setInputValue(slugifyTitle(title));
+    const title = record.params.title;
+    if (title) {
+      setInputValue(slugifyTitle(title));
+    }
   }
 };
 
