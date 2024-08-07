@@ -6,9 +6,15 @@ import { theme } from "@adminjs/design-system";
 
 import { StringListShowLabel, StringListShowWrapper, ListItem } from "./styles";
 
-const separator = "|";
+interface StringListShowPropsType extends ShowPropertyProps {
+  stringListSeparator: string;
+}
 
-const StringListShow: FC<ShowPropertyProps> = ({ property, record }) => {
+const StringListShow: FC<StringListShowPropsType> = ({
+  property,
+  record,
+  stringListSeparator,
+}) => {
   return (
     <ThemeProvider theme={theme}>
       <StringListShowWrapper>
@@ -16,7 +22,7 @@ const StringListShow: FC<ShowPropertyProps> = ({ property, record }) => {
         {record.params.facts && (
           <ul>
             {record.params.facts
-              .split(separator)
+              .split(stringListSeparator)
               .map((item: string, index: number) => (
                 <ListItem key={index}>{`- ${item}`}</ListItem>
               ))}
