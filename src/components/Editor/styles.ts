@@ -9,6 +9,7 @@ export const Label = styled.div`
 
 export const EditorWrapper = styled(Box)`
   padding: 12px;
+  margin-bottom: 24px;
   border: 1px solid rgb(187, 195, 203);
 `;
 
