@@ -5,15 +5,16 @@ import { ThemeProvider } from "styled-components";
 import { theme } from "@adminjs/design-system";
 
 import { StringListShowLabel, StringListShowWrapper, ListItem } from "./styles";
+import { separator } from "../../constants";
 
 interface StringListShowPropsType extends ShowPropertyProps {
-  stringListSeparator: string;
+  stringListSeparator?: string;
 }
 
 const StringListShow: FC<StringListShowPropsType> = ({
   property,
   record,
-  stringListSeparator,
+  stringListSeparator = separator,
 }) => {
   return (
     <ThemeProvider theme={theme}>
