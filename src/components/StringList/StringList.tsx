@@ -18,6 +18,7 @@ import {
 } from "./styles.js";
 
 import { SortableList } from "./SortableList/SortableList.js";
+import { separator } from "./constants.js";
 
 type ListDataTypes = {
   id: string;
@@ -26,7 +27,16 @@ type ListDataTypes = {
 
 type StringListTypes = Omit<EditPropertyProps, "where" | "resource">;
 
-const StringList: FC<StringListTypes> = ({ record, onChange, property }) => {
+interface StringListShowPropsType extends StringListTypes {
+  stringListSeparator?: string;
+}
+
+const StringList: FC<StringListShowPropsType> = ({
+  record,
+  onChange,
+  property,
+  stringListSeparator = separator,
+}) => {
   const stringListValue =
     record.params?.[property.path] ?? property.props.value ?? "";
 
@@ -107,11 +117,11 @@ const StringList: FC<StringListTypes> = ({ record, onChange, property }) => {
   }
 
   function prepareDataForDatabase(list: ListDataTypes[]) {
-    return list.map(({ value }) => value).join("|");
+    return list.map(({ value }) => value).join(stringListSeparator);
   }
 
   function prepareDataForList(str: string) {
-    return str.split("|").map((item) => createListObject(item));
+    return str.split(stringListSeparator).map((item) => createListObject(item));
   }
 
   function createListObject(value: string) {
