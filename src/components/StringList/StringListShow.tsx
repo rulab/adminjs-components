@@ -5,7 +5,7 @@ import { ThemeProvider } from "styled-components";
 import { theme } from "@adminjs/design-system";
 
 import { StringListShowLabel, StringListShowWrapper, ListItem } from "./styles";
-import { separator } from "../../constants";
+import { separator } from "./constants";
 
 interface StringListShowPropsType extends ShowPropertyProps {
   stringListSeparator?: string;

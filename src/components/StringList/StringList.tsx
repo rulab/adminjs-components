@@ -18,7 +18,7 @@ import {
 } from "./styles.js";
 
 import { SortableList } from "./SortableList/SortableList.js";
-import { separator } from "../../constants.js";
+import { separator } from "./constants.js";
 
 type ListDataTypes = {
   id: string;
