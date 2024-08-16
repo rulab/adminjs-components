@@ -16,7 +16,7 @@ const EditorShow = ({ property, record }) => {
       <EditorShowWrapper>
         <Label>Content</Label>
         {htmlContent && (
-          <div dangerouslySetInnerHTML={{ __html: String(htmlContent) }} />
+          <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
         )}
       </EditorShowWrapper>
     </ThemeProvider>
