@@ -4,6 +4,8 @@ import { theme } from "@adminjs/design-system";
 
 import { parseHtml } from "../../utils/parseHtml";
 
+import { EditorShowWrapper } from "./styles";
+
 import { Label } from "./styles";
 
 const EditorShow = ({ property, record }) => {
@@ -11,10 +13,12 @@ const EditorShow = ({ property, record }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Label>Content</Label>
-      {htmlContent && (
-        <div dangerouslySetInnerHTML={{ __html: String(htmlContent) }} />
-      )}
+      <EditorShowWrapper>
+        <Label>Content</Label>
+        {htmlContent && (
+          <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+        )}
+      </EditorShowWrapper>
     </ThemeProvider>
   );
 };

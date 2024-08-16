@@ -13,6 +13,47 @@ export const EditorWrapper = styled(Box)`
   border: 1px solid rgb(187, 195, 203);
 `;
 
+export const EditorShowWrapper = styled(Box)`
+  margin-bottom: 24px;
+
+  h1,
+  h2,
+  h3 {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  h1 {
+    font-size: 18px;
+  }
+
+  h2 {
+    font-size: 16px;
+  }
+
+  h3 {
+    font-size: 14px;
+  }
+
+  p {
+    margin-bottom: 8px;
+  }
+
+  ol,
+  ul {
+    margin-left: 20px;
+    margin-bottom: 8px;
+  }
+
+  ol {
+    list-style: auto;
+  }
+
+  ul {
+    list-style: inherit;
+  }
+`;
+
 export const StyledEditor = styled.div`
   .cdx-block,
   .ce-header {
