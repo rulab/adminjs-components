@@ -25,12 +25,15 @@
     "@editorjs/list": "^1.9.0",
     "@editorjs/paragraph": "^2.11.6",
     "adminjs": "^7.8.1",
+    "chroma-js": "^3.0.0",
     "editorjs-html": "^3.4.3",
     "react": "^18.2.0",
+    "react-select": "^5.8.0",
     "slugify": "^1.6.6",
     "styled-components": "^6.1.11"
   },
   "devDependencies": {
+    "@types/chroma-js": "^2.4.4",
     "@types/node": "^20.11.24",
     "@types/react": "^18.2.61",
     "eslint": "^8.57.0",

@@ -29,12 +29,18 @@ dependencies:
   adminjs:
     specifier: ^7.8.1
     version: 7.8.1(@types/react@18.3.3)
+  chroma-js:
+    specifier: ^3.0.0
+    version: 3.0.0
   editorjs-html:
     specifier: ^3.4.3
     version: 3.4.3
   react:
     specifier: ^18.2.0
     version: 18.3.1
+  react-select:
+    specifier: ^5.8.0
+    version: 5.8.0(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
   slugify:
     specifier: ^1.6.6
     version: 1.6.6
@@ -43,6 +49,9 @@ dependencies:
     version: 6.1.11(react-dom@18.3.1)(react@18.3.1)
 
 devDependencies:
+  '@types/chroma-js':
+    specifier: ^2.4.4
+    version: 2.4.4
   '@types/node':
     specifier: ^20.11.24
     version: 20.14.2
@@ -2940,6 +2949,10 @@ packages:
       - '@tiptap/pm'
     dev: false
 
+  /@types/chroma-js@2.4.4:
+    resolution: {integrity: sha512-/DTccpHTaKomqussrn+ciEvfW4k6NAHzNzs/sts1TCqg333qNxOhy8TNIoQCmbGG3Tl8KdEhkGAssb1n3mTXiQ==}
+    dev: true
+
   /@types/estree@1.0.5:
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
 
@@ -3335,6 +3348,10 @@ packages:
     optionalDependencies:
       fsevents: 2.3.3
     dev: true
+
+  /chroma-js@3.0.0:
+    resolution: {integrity: sha512-ZFn4qxtZTvRJ7XatOLgaHGJYN10LoS6T0EMsu7IVayFG5+b6Yw8wCGQL5qLgo4B+wrRZ9niCrozOQ4a584bvaA==}
+    dev: false
 
   /classnames@2.5.1:
     resolution: {integrity: sha512-saHYOzhIQs6wy2sVxTM6bUDsQO4F50V9RQ22qBpEdCW+I+/Wmke2HOl6lS6dTpdxVhb88/I6+Hs+438c3lfUow==}
