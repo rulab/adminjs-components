@@ -38,7 +38,7 @@ const Editor = ({ property, record, onChangeAdmin, editorId }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Label>Text</Label>
+      <Label>{property.path}</Label>
       <EditorWrapper>
         <StyledEditor id={editorId} />
       </EditorWrapper>

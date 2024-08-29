@@ -4,7 +4,12 @@ import { styled } from "@adminjs/design-system/styled-components";
 export const Label = styled.div`
   font-size: 12px;
   margin-bottom: 8px;
+  text-transform: capitalize;
+`;
+
+export const ShowLabel = styled(Label)`
   color: rgb(137, 138, 154);
+  font-weight: 300;
 `;
 
 export const EditorWrapper = styled(Box)`

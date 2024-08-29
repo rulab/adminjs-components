@@ -6,7 +6,7 @@ import { parseHtml } from "../../utils/parseHtml";
 
 import { EditorShowWrapper } from "./styles";
 
-import { Label } from "./styles";
+import { ShowLabel } from "./styles";
 
 const EditorShow = ({ property, record }) => {
   const htmlContent = parseHtml(record.params[property.path]);
@@ -14,7 +14,7 @@ const EditorShow = ({ property, record }) => {
   return (
     <ThemeProvider theme={theme}>
       <EditorShowWrapper>
-        <Label>Content</Label>
+        <ShowLabel>{property.path}</ShowLabel>
         {htmlContent && (
           <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
         )}

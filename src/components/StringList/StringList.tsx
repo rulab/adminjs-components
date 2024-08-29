@@ -1,20 +1,21 @@
+import { Button, Input, theme } from "@adminjs/design-system";
+import { EditPropertyProps } from "adminjs";
 import React, {
-  useState,
-  useEffect,
   ChangeEvent,
+  FC,
   KeyboardEvent,
   SyntheticEvent,
-  FC,
+  useEffect,
+  useState,
 } from "react";
 import { ThemeProvider } from "styled-components";
-import { EditPropertyProps } from "adminjs";
-import { theme, Button, Input, Label } from "@adminjs/design-system";
 
 import {
-  StyledWrapper,
-  StyledCustomInput,
-  StyledListWrapper,
-  StyledInputWrapper,
+  CustomInput,
+  InputWrapper,
+  Label,
+  ListWrapper,
+  Wrapper,
 } from "./styles.js";
 
 import { SortableList } from "./SortableList/SortableList.js";
@@ -55,9 +56,9 @@ const StringList: FC<StringListShowPropsType> = ({
 
   return (
     <ThemeProvider theme={theme}>
-      <Label htmlFor="custom">String List</Label>
-      <StyledWrapper>
-        <StyledListWrapper>
+      <Label htmlFor="custom">{property.path}</Label>
+      <Wrapper>
+        <ListWrapper>
           <SortableList
             items={list}
             onChange={setList}
@@ -67,15 +68,15 @@ const StringList: FC<StringListShowPropsType> = ({
               </SortableList.Item>
             )}
           />
-        </StyledListWrapper>
-        <StyledInputWrapper>
+        </ListWrapper>
+        <InputWrapper>
           <Input
             id="stringList"
             name={property.path}
             value={serializedData}
             hidden
           />
-          <StyledCustomInput
+          <CustomInput
             id="custom"
             name="customInput"
             value={inputValue}
@@ -85,8 +86,8 @@ const StringList: FC<StringListShowPropsType> = ({
           <Button variant="outlined" onClick={handleAddButton}>
             Add
           </Button>
-        </StyledInputWrapper>
-      </StyledWrapper>
+        </InputWrapper>
+      </Wrapper>
     </ThemeProvider>
   );
 
