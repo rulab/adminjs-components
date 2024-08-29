@@ -1,4 +1,4 @@
-import { styled } from '@adminjs/design-system/styled-components';
+import { styled } from "@adminjs/design-system/styled-components";
 
 export const StyledListItem = styled.li`
   display: flex;
@@ -13,7 +13,7 @@ export const StyledListItem = styled.li`
   list-style: none;
 `;
 
-export const DragButton = styled.button`
+export const StyledDragButton = styled.button`
   padding: 3px;
   margin-right: 15px;
   cursor: move;

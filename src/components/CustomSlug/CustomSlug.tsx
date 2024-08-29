@@ -13,10 +13,10 @@ import { theme } from "@adminjs/design-system";
 import { slugifyTitle } from "../../utils/index.js";
 
 import {
-  CustomInput,
-  GenerateButton,
-  InputWrapper,
-  Label,
+  StyledCustomInput,
+  StyledGenerateButton,
+  StyledInputWrapper,
+  StyledLabel,
 } from "./styles.js";
 
 type CustomSlugTypes = Omit<EditPropertyProps, "where" | "resource">;
@@ -30,18 +30,18 @@ const CustomSlug: FC<CustomSlugTypes> = ({ property, record, onChange }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Label htmlFor="customSlug">{property.path}</Label>
-      <InputWrapper>
-        <CustomInput
+      <StyledLabel htmlFor="customSlug">{property.path}</StyledLabel>
+      <StyledInputWrapper>
+        <StyledCustomInput
           id={property.path}
           name={property.path}
           value={inputValue}
           onChange={handleInput}
         />
-        <GenerateButton variant="outlined" onClick={generateSlug}>
+        <StyledGenerateButton variant="outlined" onClick={generateSlug}>
           Generate Slug
-        </GenerateButton>
-      </InputWrapper>
+        </StyledGenerateButton>
+      </StyledInputWrapper>
     </ThemeProvider>
   );
 

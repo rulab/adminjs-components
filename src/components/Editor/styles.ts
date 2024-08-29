@@ -1,24 +1,24 @@
 import { Box } from "@adminjs/design-system";
 import { styled } from "@adminjs/design-system/styled-components";
 
-export const Label = styled.div`
+export const StyledLabel = styled.div`
   font-size: 12px;
   margin-bottom: 8px;
   text-transform: capitalize;
 `;
 
-export const ShowLabel = styled(Label)`
+export const StyledShowLabel = styled(StyledLabel)`
   color: rgb(137, 138, 154);
   font-weight: 300;
 `;
 
-export const EditorWrapper = styled(Box)`
+export const StyledEditorWrapper = styled(Box)`
   padding: 12px;
   margin-bottom: 24px;
   border: 1px solid rgb(187, 195, 203);
 `;
 
-export const EditorShowWrapper = styled(Box)`
+export const StyledEditorShowWrapper = styled(Box)`
   margin-bottom: 24px;
 
   h1,

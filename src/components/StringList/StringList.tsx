@@ -11,11 +11,11 @@ import React, {
 import { ThemeProvider } from "styled-components";
 
 import {
-  CustomInput,
-  InputWrapper,
-  Label,
-  ListWrapper,
-  Wrapper,
+  StyledCustomInput,
+  StyledInputWrapper,
+  StyledLabel,
+  StyledListWrapper,
+  StyledWrapper,
 } from "./styles.js";
 
 import { SortableList } from "./SortableList/SortableList.js";
@@ -56,9 +56,9 @@ const StringList: FC<StringListShowPropsType> = ({
 
   return (
     <ThemeProvider theme={theme}>
-      <Label htmlFor="custom">{property.path}</Label>
-      <Wrapper>
-        <ListWrapper>
+      <StyledLabel htmlFor="custom">{property.path}</StyledLabel>
+      <StyledWrapper>
+        <StyledListWrapper>
           <SortableList
             items={list}
             onChange={setList}
@@ -68,15 +68,15 @@ const StringList: FC<StringListShowPropsType> = ({
               </SortableList.Item>
             )}
           />
-        </ListWrapper>
-        <InputWrapper>
+        </StyledListWrapper>
+        <StyledInputWrapper>
           <Input
             id="stringList"
             name={property.path}
             value={serializedData}
             hidden
           />
-          <CustomInput
+          <StyledCustomInput
             id="custom"
             name="customInput"
             value={inputValue}
@@ -86,8 +86,8 @@ const StringList: FC<StringListShowPropsType> = ({
           <Button variant="outlined" onClick={handleAddButton}>
             Add
           </Button>
-        </InputWrapper>
-      </Wrapper>
+        </StyledInputWrapper>
+      </StyledWrapper>
     </ThemeProvider>
   );
 
