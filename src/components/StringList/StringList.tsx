@@ -1,20 +1,21 @@
+import { Button, Input, theme } from "@adminjs/design-system";
+import { EditPropertyProps } from "adminjs";
 import React, {
-  useState,
-  useEffect,
   ChangeEvent,
+  FC,
   KeyboardEvent,
   SyntheticEvent,
-  FC,
+  useEffect,
+  useState,
 } from "react";
 import { ThemeProvider } from "styled-components";
-import { EditPropertyProps } from "adminjs";
-import { theme, Button, Input, Label } from "@adminjs/design-system";
 
 import {
-  StyledWrapper,
   StyledCustomInput,
-  StyledListWrapper,
   StyledInputWrapper,
+  StyledLabel,
+  StyledListWrapper,
+  StyledWrapper,
 } from "./styles.js";
 
 import { SortableList } from "./SortableList/SortableList.js";
@@ -55,7 +56,7 @@ const StringList: FC<StringListShowPropsType> = ({
 
   return (
     <ThemeProvider theme={theme}>
-      <Label htmlFor="custom">String List</Label>
+      <StyledLabel htmlFor="custom">{property.path}</StyledLabel>
       <StyledWrapper>
         <StyledListWrapper>
           <SortableList

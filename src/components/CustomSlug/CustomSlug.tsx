@@ -1,3 +1,4 @@
+import { EditPropertyProps } from "adminjs";
 import React, {
   ChangeEvent,
   FC,
@@ -6,16 +7,16 @@ import React, {
   useState,
 } from "react";
 import { ThemeProvider } from "styled-components";
-import { EditPropertyProps } from "adminjs";
 
-import { theme, Label } from "@adminjs/design-system";
+import { theme } from "@adminjs/design-system";
 
 import { slugifyTitle } from "../../utils/index.js";
 
 import {
-  StyledInputWrapper,
   StyledCustomInput,
   StyledGenerateButton,
+  StyledInputWrapper,
+  StyledLabel,
 } from "./styles.js";
 
 type CustomSlugTypes = Omit<EditPropertyProps, "where" | "resource">;
@@ -29,7 +30,7 @@ const CustomSlug: FC<CustomSlugTypes> = ({ property, record, onChange }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Label htmlFor="customSlug">Slug</Label>
+      <StyledLabel htmlFor="customSlug">{property.path}</StyledLabel>
       <StyledInputWrapper>
         <StyledCustomInput
           id={property.path}

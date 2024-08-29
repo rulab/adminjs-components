@@ -4,7 +4,7 @@ import { ShowPropertyProps } from "adminjs";
 import { ThemeProvider } from "styled-components";
 import { theme } from "@adminjs/design-system";
 
-import { StringListShowLabel, StringListShowWrapper, ListItem } from "./styles";
+import { StyledShowLabel, StyledShowWrapper, StyledListItem } from "./styles";
 import { separator } from "./constants";
 
 interface StringListShowPropsType extends ShowPropertyProps {
@@ -18,18 +18,18 @@ const StringListShow: FC<StringListShowPropsType> = ({
 }) => {
   return (
     <ThemeProvider theme={theme}>
-      <StringListShowWrapper>
-        <StringListShowLabel>{property.name}</StringListShowLabel>
+      <StyledShowWrapper>
+        <StyledShowLabel>{property.path}</StyledShowLabel>
         {record.params.facts && (
           <ul>
             {record.params.facts
               .split(stringListSeparator)
               .map((item: string, index: number) => (
-                <ListItem key={index}>{`- ${item}`}</ListItem>
+                <StyledListItem key={index}>{`- ${item}`}</StyledListItem>
               ))}
           </ul>
         )}
-      </StringListShowWrapper>
+      </StyledShowWrapper>
     </ThemeProvider>
   );
 };

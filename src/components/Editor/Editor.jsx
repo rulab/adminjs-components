@@ -3,7 +3,7 @@ import { ThemeProvider } from "styled-components";
 import EditorJS from "@editorjs/editorjs";
 import { theme } from "@adminjs/design-system";
 
-import { Label, StyledEditor, EditorWrapper } from "./styles";
+import { StyledLabel, StyledEditor, StyledEditorWrapper } from "./styles";
 
 import { EDITOR_TOOLS } from "./config";
 
@@ -38,10 +38,10 @@ const Editor = ({ property, record, onChangeAdmin, editorId }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Label>Text</Label>
-      <EditorWrapper>
+      <StyledLabel>{property.path}</StyledLabel>
+      <StyledEditorWrapper>
         <StyledEditor id={editorId} />
-      </EditorWrapper>
+      </StyledEditorWrapper>
     </ThemeProvider>
   );
 };

@@ -1,5 +1,5 @@
-import { styled } from "@adminjs/design-system/styled-components";
 import { Box, Input } from "@adminjs/design-system";
+import { styled } from "@adminjs/design-system/styled-components";
 
 export const StyledWrapper = styled(Box)`
   display: flex;
@@ -20,18 +20,22 @@ export const StyledListWrapper = styled(Box)`
   margin-bottom: 15px;
 `;
 
-export const StringListShowLabel = styled.div`
+export const StyledLabel = styled.div`
   font-size: 12px;
   margin-bottom: 8px;
   text-transform: capitalize;
-  line-height: 16px;
-  color: rgb(137, 138, 154);
 `;
 
-export const StringListShowWrapper = styled(Box)`
+export const StyledShowLabel = styled(StyledLabel)`
+  line-height: 16px;
+  color: rgb(137, 138, 154);
+  font-weight: 300;
+`;
+
+export const StyledShowWrapper = styled(Box)`
   margin-bottom: 35px;
 `;
 
-export const ListItem = styled.li`
+export const StyledListItem = styled.li`
   margin-bottom: 5px;
 `;

@@ -1,5 +1,5 @@
-import React, { Fragment, useMemo, useState } from 'react';
-import type { ReactNode } from 'react';
+import React, { Fragment, useMemo, useState } from "react";
+import type { ReactNode } from "react";
 
 import {
   DndContext,
@@ -9,20 +9,20 @@ import {
   useSensors,
   DragOverlay,
   defaultDropAnimationSideEffects,
-} from '@dnd-kit/core';
+} from "@dnd-kit/core";
 import {
   SortableContext,
   arrayMove,
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
-} from '@dnd-kit/sortable';
+} from "@dnd-kit/sortable";
 
-import type { DropAnimation } from '@dnd-kit/core';
+import type { DropAnimation } from "@dnd-kit/core";
 
-import { DragHandle, SortableItem } from './components/index.js';
-import { StyledListWrapper } from './styles.js';
+import { SortableItem } from "./components/index.js";
+import { StyledListWrapper } from "./styles.js";
 
-import type { Active, UniqueIdentifier } from '@dnd-kit/core';
+import type { Active, UniqueIdentifier } from "@dnd-kit/core";
 
 interface BaseItem {
   id: UniqueIdentifier;
@@ -39,7 +39,7 @@ const dropAnimationConfig: DropAnimation = {
   sideEffects: defaultDropAnimationSideEffects({
     styles: {
       active: {
-        opacity: '0.4',
+        opacity: "0.4",
       },
     },
   }),
