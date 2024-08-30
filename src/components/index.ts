@@ -3,3 +3,4 @@ export { default as StringList } from "./StringList/StringList.js";
 export { default as StringListShow } from "./StringList/StringListShow.js";
 export { default as Editor } from "./Editor/Editor.jsx";
 export { default as EditorShow } from "./Editor/EditorShow.jsx";
+export { default as EditorList } from "./Editor/EditorList.jsx";

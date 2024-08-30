@@ -4,21 +4,20 @@ import { theme } from "@adminjs/design-system";
 
 import { parseHtml } from "../../utils/parseHtml";
 
-import { StyledEditorShowWrapper, StyledShowLabel } from "./styles";
+import { StyledEditorViewWrapper } from "./styles";
 
-const EditorShow = ({ property, record }) => {
+const EditorList = ({ property, record }) => {
   const htmlContent = parseHtml(record.params[property.path]);
 
   return (
     <ThemeProvider theme={theme}>
-      <StyledEditorShowWrapper>
-        <StyledShowLabel>{property.path}</StyledShowLabel>
+      <StyledEditorViewWrapper>
         {htmlContent && (
           <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
         )}
-      </StyledEditorShowWrapper>
+      </StyledEditorViewWrapper>
     </ThemeProvider>
   );
 };
 
-export default EditorShow;
+export default EditorList;
