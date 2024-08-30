@@ -18,9 +18,7 @@ export const StyledEditorWrapper = styled(Box)`
   border: 1px solid rgb(187, 195, 203);
 `;
 
-export const StyledEditorShowWrapper = styled(Box)`
-  margin-bottom: 24px;
-
+export const StyledEditorViewWrapper = styled(Box)`
   h1,
   h2,
   h3 {
@@ -57,6 +55,10 @@ export const StyledEditorShowWrapper = styled(Box)`
   ul {
     list-style: inherit;
   }
+`;
+
+export const StyledEditorShowWrapper = styled(StyledEditorViewWrapper)`
+  margin-bottom: 24px;
 `;
 
 export const StyledEditor = styled.div`
