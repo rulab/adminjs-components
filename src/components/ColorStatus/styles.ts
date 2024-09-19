@@ -26,4 +26,5 @@ export const ColorStatusBadge = styled.div`
   border-radius: 20px;
   font-size: 12px;
   color: white;
+  white-space: nowrap;
 `;

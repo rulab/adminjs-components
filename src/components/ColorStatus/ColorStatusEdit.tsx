@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useState, useEffect } from "react";
+import React, { FC, useState, useEffect } from "react";
 
 import { EditPropertyProps } from "adminjs";
 import Select, { MultiValue, SingleValue, StylesConfig } from "react-select";
@@ -6,17 +6,9 @@ import chroma from "chroma-js";
 
 import { ColorStatusWrapper, Label } from "./styles";
 
-type CustomSlugTypes = Omit<EditPropertyProps, "where" | "resource">;
+import type { AvailableValueType } from "./types";
 
-type ColorOption = {
-  value: string;
-  label: string;
-  color: string;
-};
-
-interface ColorStatusPropsType extends CustomSlugTypes {
-  options: ColorOption[];
-}
+type ColorStatusTypes = Omit<EditPropertyProps, "where" | "resource">;
 
 const dot = (color = "transparent") => ({
   alignItems: "center",
@@ -33,7 +25,7 @@ const dot = (color = "transparent") => ({
   },
 });
 
-const colorStyles: StylesConfig<ColorOption> = {
+const colorStyles: StylesConfig<AvailableValueType> = {
   control: (styles) => ({ ...styles, backgroundColor: "white" }),
   option: (styles, { data, isDisabled, isFocused, isSelected }) => {
     const color = chroma(data.color);
@@ -61,23 +53,21 @@ const colorStyles: StylesConfig<ColorOption> = {
   singleValue: (styles, { data }) => ({ ...styles, ...dot(data.color) }),
 };
 
-const ColorStatus: FC<ColorStatusPropsType> = ({
-  property,
-  record,
-  onChange,
-  options,
-}) => {
-  const currentOption = options.find(
+const ColorStatus: FC<ColorStatusTypes> = ({ property, record, onChange }) => {
+  const availableValues = property.availableValues as AvailableValueType[];
+
+  const currentOption = availableValues.find(
     (item) => item.value === record.params.colorStatus,
-  );
+  ) as AvailableValueType;
+
   const [selectOption, setCurrentOption] = useState<
-    SingleValue<ColorOption> | undefined
+    SingleValue<AvailableValueType> | undefined
   >(currentOption);
 
   const handleSelectChange = (
-    option: SingleValue<ColorOption> | MultiValue<ColorOption>,
+    option: SingleValue<AvailableValueType> | MultiValue<AvailableValueType>,
   ) => {
-    setCurrentOption(option as SingleValue<ColorOption>);
+    setCurrentOption(option as SingleValue<AvailableValueType>);
   };
 
   useEffect(() => {
@@ -86,15 +76,15 @@ const ColorStatus: FC<ColorStatusPropsType> = ({
 
   return (
     <ColorStatusWrapper>
-      <Label>Color Status</Label>
+      <Label>{property.path}</Label>
       <Select
         className="basic-single"
         classNamePrefix="select"
-        defaultValue={selectOption ?? options[0]}
+        defaultValue={selectOption ?? availableValues[0]}
         onChange={handleSelectChange}
         isClearable={true}
         name="color"
-        options={options}
+        options={availableValues}
         styles={colorStyles}
       />
     </ColorStatusWrapper>

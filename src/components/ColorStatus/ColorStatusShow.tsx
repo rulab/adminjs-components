@@ -3,12 +3,17 @@ import { ShowPropertyProps } from "adminjs";
 
 import { ColorStatusBadgeWrapper, ColorStatusBadge, ShowLabel } from "./styles";
 
-const ColorStatusShow: FC<ShowPropertyProps> = ({ record }) => {
-  console.log(record, "record");
+import type { AvailableValueType } from "./types";
+
+const ColorStatusShow: FC<ShowPropertyProps> = ({ property, record }) => {
+  const currentOption = property.availableValues?.find(
+    (item) => item.value === record.params.colorStatus,
+  ) as AvailableValueType;
+
   return (
     <ColorStatusBadgeWrapper>
-      <ShowLabel>Status</ShowLabel>
-      <ColorStatusBadge color="green">
+      <ShowLabel>{property.path}</ShowLabel>
+      <ColorStatusBadge color={currentOption.color}>
         {record.params.colorStatus}
       </ColorStatusBadge>
     </ColorStatusBadgeWrapper>
