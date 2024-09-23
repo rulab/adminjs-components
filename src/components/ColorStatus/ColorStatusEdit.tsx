@@ -57,7 +57,7 @@ const ColorStatus: FC<ColorStatusTypes> = ({ property, record, onChange }) => {
   const availableValues = property.availableValues as AvailableValueType[];
 
   const currentOption = availableValues.find(
-    (item) => item.value === record.params.colorStatus,
+    (item) => item.value === record.params[property.path],
   ) as AvailableValueType;
 
   const [selectOption, setCurrentOption] = useState<

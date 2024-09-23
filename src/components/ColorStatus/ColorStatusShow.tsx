@@ -7,14 +7,14 @@ import type { AvailableValueType } from "./types";
 
 const ColorStatusShow: FC<ShowPropertyProps> = ({ property, record }) => {
   const currentOption = property.availableValues?.find(
-    (item) => item.value === record.params.colorStatus,
+    (item) => item.value === record.params[property.path],
   ) as AvailableValueType;
 
   return (
     <ColorStatusBadgeWrapper>
       <ShowLabel>{property.path}</ShowLabel>
       <ColorStatusBadge color={currentOption.color}>
-        {record.params.colorStatus}
+        {record.params[property.path]}
       </ColorStatusBadge>
     </ColorStatusBadgeWrapper>
   );
