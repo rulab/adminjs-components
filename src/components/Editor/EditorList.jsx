@@ -1,9 +1,8 @@
 import React from "react";
-import { ThemeProvider } from "styled-components";
+
 import { theme } from "@adminjs/design-system";
-
+import { ThemeProvider } from "styled-components";
 import { parseHtml } from "../../utils/parseHtml";
-
 import { StyledEditorViewWrapper } from "./styles";
 
 const EditorList = ({ property, record }) => {
