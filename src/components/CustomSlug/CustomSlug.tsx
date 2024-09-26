@@ -19,9 +19,14 @@ import {
   StyledLabel,
 } from "./styles.js";
 
-type CustomSlugTypes = Omit<EditPropertyProps, "where" | "resource">;
+type CustomSlugTypes = Omit<EditPropertyProps, "where">;
 
-const CustomSlug: FC<CustomSlugTypes> = ({ property, record, onChange }) => {
+const CustomSlug: FC<CustomSlugTypes> = ({
+  property,
+  record,
+  resource,
+  onChange,
+}) => {
   const [inputValue, setInputValue] = useState(record.params.slug);
 
   useEffect(() => {
@@ -51,9 +56,11 @@ const CustomSlug: FC<CustomSlugTypes> = ({ property, record, onChange }) => {
 
   function generateSlug(e: SyntheticEvent<HTMLInputElement>) {
     e.preventDefault();
-    const title = record.params.title;
-    if (title) {
-      setInputValue(slugifyTitle(title));
+    const slugSource =
+      record.params[property.props.sourceField ?? resource.titleProperty.name];
+
+    if (slugSource) {
+      setInputValue(slugifyTitle(slugSource));
     }
   }
 };
