@@ -55,6 +55,34 @@ export const StyledEditorViewWrapper = styled(Box)`
   ul {
     list-style: inherit;
   }
+
+  table,
+  audio {
+    margin: 16px 0;
+  }
+
+  table,
+  th,
+  td {
+    border: 1px solid;
+  }
+
+  th {
+    font-weight: bold;
+  }
+
+  th,
+  td {
+    padding: 4px;
+  }
+
+  blockquote {
+    display: block;
+    padding: 5px 8px;
+    width: fit-content;
+    border-radius: 4px;
+    background-color: #e6e6e6;
+  }
 `;
 
 export const StyledEditorShowWrapper = styled(StyledEditorViewWrapper)`
@@ -62,9 +90,15 @@ export const StyledEditorShowWrapper = styled(StyledEditorViewWrapper)`
 `;
 
 export const StyledEditor = styled.div`
+  audio,
   .cdx-block,
   .ce-header {
     padding-left: 58px;
+  }
+
+  input {
+    margin-left: 58px;
+    width: auto;
   }
 
   .cdx-list {
