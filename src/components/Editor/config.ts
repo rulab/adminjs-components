@@ -11,7 +11,10 @@ export const EDITOR_TOOLS = {
     class: Paragraph,
     inlineToolbar: true,
   },
-  list: List,
+  list: {
+    class: List,
+    inlineToolbar: true,
+  },
   header: {
     class: Header,
     config: {
@@ -20,7 +23,13 @@ export const EDITOR_TOOLS = {
       defaultLevel: 2,
     },
   },
-  table: Table,
-  quote: Quote,
+  table: {
+    class: Table,
+    inlineToolbar: true,
+  },
+  quote: {
+    class: Quote,
+    inlineToolbar: true,
+  },
   audioPlayer: AudioPlayer,
 };
