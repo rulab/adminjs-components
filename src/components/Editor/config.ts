@@ -5,6 +5,7 @@ import Quote from "@editorjs/quote";
 import Table from "@editorjs/table";
 // @ts-ignore
 import AudioPlayer from "editorjs-audio-player";
+import ImageTool from "@editorjs/image";
 
 export const EDITOR_TOOLS = {
   paragraph: {
@@ -32,4 +33,21 @@ export const EDITOR_TOOLS = {
     inlineToolbar: true,
   },
   audioPlayer: AudioPlayer,
+  image: {
+    class: ImageTool,
+    config: {
+      // uploader: {
+      //   async uploadByFile(file: File) {
+      //     TODO: Upload file to server and return url
+      //     const url = await sentImageToServer(file);
+      //     return {
+      //       success: 1,
+      //       file: {
+      //         url,
+      //       },
+      //     };
+      //   },
+      // },
+    },
+  },
 };

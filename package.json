@@ -22,6 +22,7 @@
     "@dnd-kit/sortable": "^8.0.0",
     "@editorjs/editorjs": "^2.30.2",
     "@editorjs/header": "^2.8.7",
+    "@editorjs/image": "^2.9.3",
     "@editorjs/list": "^1.9.0",
     "@editorjs/paragraph": "^2.11.6",
     "@editorjs/quote": "^2.7.2",
