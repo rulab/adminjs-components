@@ -10,7 +10,7 @@ import { ThemeProvider } from "styled-components";
 
 import { theme } from "@adminjs/design-system";
 
-import { slugifyTitle } from "../../utils/index.js";
+import { slugifyTitle } from "../../utils";
 
 import {
   StyledCustomInput,
@@ -21,7 +21,7 @@ import {
 
 type CustomSlugTypes = Omit<EditPropertyProps, "where">;
 
-const CustomSlug: FC<CustomSlugTypes> = ({
+const SlugEdit: FC<CustomSlugTypes> = ({
   property,
   record,
   resource,
@@ -65,4 +65,4 @@ const CustomSlug: FC<CustomSlugTypes> = ({
   }
 };
 
-export default CustomSlug;
+export default SlugEdit;

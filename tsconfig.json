@@ -12,6 +12,6 @@
     "module": "ESNext",
     "lib": ["es2022", "dom", "dom.iterable"],
     "jsx": "react",
-    "noEmit": true
+    "declaration": true
   }
 }
