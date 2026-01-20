@@ -13,6 +13,7 @@ export default defineConfig({
         '.ts': 'ts',
         '.tsx': 'tsx',                    // разрешить .tsx
     },
+    bundle: false,
     external: [
         'path',
         'url',

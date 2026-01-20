@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "baseUrl": "./src",
+    "outDir": "dist",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "target": "es2022",
@@ -13,5 +15,6 @@
     "lib": ["es2022", "dom", "dom.iterable"],
     "jsx": "react",
     "declaration": true
-  }
+  },
+  "include": ["src/**/*"]
 }

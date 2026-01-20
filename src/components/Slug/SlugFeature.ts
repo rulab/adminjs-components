@@ -1,30 +1,26 @@
 import {buildFeature, ComponentLoader, FeatureType} from "adminjs";
 import {bundleComponent} from "../../utils/bundle-component";
+import SlugOptions from "./SlugOptions.type";
 
 const COMPONENT_NAME = 'Slug'
 
-type SlugOptions = {
-    componentLoader: ComponentLoader
-    key: string
-}
 const SlugFeature = (config: SlugOptions): FeatureType => {
-    const {componentLoader,key} = config
+    const {componentLoader,source,key} = config
 
-    const uploadFeature = () => {
-        const editComponent = bundleComponent(componentLoader, COMPONENT_NAME, 'SlugEdit.tsx')
-        return buildFeature({
-            properties: {
-                [key]: {
-                    isVisible: { show: false, edit: true, list: false, filter: false },
-                    components: {
-                        edit: editComponent,
-                    },
+    const editComponent = bundleComponent(componentLoader, COMPONENT_NAME, 'SlugEdit')
+
+    return buildFeature({
+        properties: {
+            [key]: {
+                isVisible: { filter: true, show: true, edit: true, list: true },
+                components: {
+                    edit: editComponent,
                 },
+                custom: {source,key}
             },
-        })
-    }
+        },
+    })
 
-    return uploadFeature()
 }
 
 export default SlugFeature

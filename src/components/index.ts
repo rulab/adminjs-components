@@ -1,4 +1,4 @@
-export { default as ColorStatusEdit } from "./ColorStatus/ColorStatusEdit.jsx";
+export { default as ColorStatusEdit } from "./ColorStatus/ColorStatusEdit.js";
 export { default as ColorStatusShow } from "./ColorStatus/ColorStatusShow.js";
 export { default as ColorStatusList } from "./ColorStatus/ColorStatusList.js";
 export { default as SlugEdit } from "./Slug/SlugEdit.js";

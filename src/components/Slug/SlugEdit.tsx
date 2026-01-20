@@ -1,4 +1,4 @@
-import { EditPropertyProps } from "adminjs";
+import {EditPropertyProps, flat} from "adminjs";
 import React, {
   ChangeEvent,
   FC,
@@ -17,7 +17,8 @@ import {
   StyledGenerateButton,
   StyledInputWrapper,
   StyledLabel,
-} from "./styles.js";
+} from "./styles";
+import SlugOptions from "./SlugOptions.type";
 
 type CustomSlugTypes = Omit<EditPropertyProps, "where">;
 
@@ -27,7 +28,18 @@ const SlugEdit: FC<CustomSlugTypes> = ({
   resource,
   onChange,
 }) => {
-  const [inputValue, setInputValue] = useState(record.params.slug);
+  console.log("✅ SlugEdit loaded", { property });
+  type SlugCustomProperty = {
+    source: string,
+    key: string
+  }
+  const { params } = record
+  const { custom } = property as unknown as { custom: SlugCustomProperty }
+
+  const source = flat.get(params, custom.source)
+  const key = flat.get(params, custom.key)
+
+  const [inputValue, setInputValue] = useState(key);
 
   useEffect(() => {
     onChange(property.path, inputValue);
