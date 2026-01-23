@@ -10,7 +10,7 @@
     "adminjs"
   ],
   "repository": {
-    "url": "https://github.com/rulab/adminjs-components"
+    "url": "git+https://github.com/rulab/adminjs-components.git"
   },
   "scripts": {
     "build": "tsc && node scripts/fix-import-extensions.js",
