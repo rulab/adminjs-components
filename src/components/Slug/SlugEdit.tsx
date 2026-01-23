@@ -22,7 +22,7 @@ import SlugOptions from "./SlugOptions.type";
 
 type CustomSlugTypes = Omit<EditPropertyProps, "where">;
 
-const SlugEdit: FC<CustomSlugTypes> = ({
+export const SlugEdit: FC<CustomSlugTypes> = ({
   property,
   record,
   resource,
@@ -47,7 +47,7 @@ const SlugEdit: FC<CustomSlugTypes> = ({
 
   return (
     <ThemeProvider theme={theme}>
-      <StyledLabel htmlFor="customSlug">{property.path}</StyledLabel>
+      <StyledLabel htmlFor="customSlug">{property.label ?? property.path}</StyledLabel>
       <StyledInputWrapper>
         <StyledCustomInput
           id={property.path}

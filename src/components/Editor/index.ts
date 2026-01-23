@@ -1,3 +1,4 @@
-export * from "./Editor.jsx";
-export * from "./EditorShow.jsx";
-export * from "./EditorList.jsx";
+export { Editor } from "./Editor.js";
+export { EditorShow } from "./EditorShow.js";
+export { EditorList } from "./EditorList.js";
+export { EditorFeature } from "./EditorFeature.js";

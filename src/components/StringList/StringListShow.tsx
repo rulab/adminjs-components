@@ -11,7 +11,7 @@ interface StringListShowPropsType extends ShowPropertyProps {
   stringListSeparator?: string;
 }
 
-const StringListShow: FC<StringListShowPropsType> = ({
+export const StringListShow: FC<StringListShowPropsType> = ({
   property,
   record,
   stringListSeparator = separator,
@@ -19,7 +19,7 @@ const StringListShow: FC<StringListShowPropsType> = ({
   return (
     <ThemeProvider theme={theme}>
       <StyledShowWrapper>
-        <StyledShowLabel>{property.path}</StyledShowLabel>
+        <StyledShowLabel>{property.label ?? property.path}</StyledShowLabel>
         {record.params.facts && (
           <ul>
             {record.params.facts

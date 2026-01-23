@@ -53,7 +53,11 @@ const colorStyles: StylesConfig<AvailableValueType> = {
   singleValue: (styles, { data }) => ({ ...styles, ...dot(data.color) }),
 };
 
-const ColorStatus: FC<ColorStatusTypes> = ({ property, record, onChange }) => {
+export const ColorStatusEdit: FC<ColorStatusTypes> = ({
+  property,
+  record,
+  onChange,
+}) => {
   const availableValues = property.availableValues as AvailableValueType[];
 
   const currentOption = availableValues.find(
@@ -76,7 +80,7 @@ const ColorStatus: FC<ColorStatusTypes> = ({ property, record, onChange }) => {
 
   return (
     <ColorStatusWrapper>
-      <Label>{property.path}</Label>
+      <Label>{property.label ?? property.path}</Label>
       <Select
         className="basic-single"
         classNamePrefix="select"
@@ -91,4 +95,4 @@ const ColorStatus: FC<ColorStatusTypes> = ({ property, record, onChange }) => {
   );
 };
 
-export default ColorStatus;
+export default ColorStatusEdit;

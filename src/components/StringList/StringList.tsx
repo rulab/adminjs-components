@@ -32,7 +32,7 @@ interface StringListShowPropsType extends StringListTypes {
   stringListSeparator?: string;
 }
 
-const StringList: FC<StringListShowPropsType> = ({
+export const StringList: FC<StringListShowPropsType> = ({
   record,
   onChange,
   property,
@@ -56,9 +56,9 @@ const StringList: FC<StringListShowPropsType> = ({
 
   return (
     <ThemeProvider theme={theme}>
-      <StyledLabel htmlFor="custom">{property.path}</StyledLabel>
+      <StyledLabel htmlFor="custom">{property.label ?? property.path}</StyledLabel>
       <StyledWrapper>
-        <StyledListWrapper>
+        <StyledListWrapper $hasItems={list.length > 0}>
           <SortableList
             items={list}
             onChange={setList}
@@ -75,6 +75,7 @@ const StringList: FC<StringListShowPropsType> = ({
             name={property.path}
             value={serializedData}
             hidden
+            readOnly
           />
           <StyledCustomInput
             id="custom"

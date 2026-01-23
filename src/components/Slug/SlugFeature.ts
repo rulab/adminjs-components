@@ -1,13 +1,13 @@
 import {buildFeature, ComponentLoader, FeatureType} from "adminjs";
-import {bundleComponent} from "../../utils/bundle-component";
-import SlugOptions from "./SlugOptions.type";
+import {bundleComponent} from "../../utils/bundle-component.js";
+import SlugOptions from "./SlugOptions.type.js";
 
 const COMPONENT_NAME = 'Slug'
 
-const SlugFeature = (config: SlugOptions): FeatureType => {
+export const SlugFeature = (config: SlugOptions): FeatureType => {
     const {componentLoader,source,key} = config
 
-    const editComponent = bundleComponent(componentLoader, COMPONENT_NAME, 'SlugEdit')
+    const editComponent = bundleComponent(componentLoader, COMPONENT_NAME, 'SlugEdit.js')
 
     return buildFeature({
         properties: {

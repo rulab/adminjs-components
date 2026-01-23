@@ -2,17 +2,17 @@ import React from "react";
 import { ThemeProvider } from "styled-components";
 import { theme } from "@adminjs/design-system";
 
-import { parseHtml } from "../../utils/parseHtml";
+import { parseHtml } from "../../utils/parseHtml.js";
 
-import { StyledEditorShowWrapper, StyledShowLabel } from "./styles";
+import { StyledEditorShowWrapper, StyledShowLabel } from "./styles.js";
 
-const EditorShow = ({ property, record }) => {
+export const EditorShow = ({ property, record }) => {
   const htmlContent = parseHtml(record.params[property.path]);
 
   return (
     <ThemeProvider theme={theme}>
       <StyledEditorShowWrapper>
-        <StyledShowLabel>{property.path}</StyledShowLabel>
+        <StyledShowLabel>{property.label ?? property.path}</StyledShowLabel>
         {htmlContent && (
           <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
         )}

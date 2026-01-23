@@ -1,7 +1,7 @@
 import {ComponentLoader} from "adminjs";
 
 type SlugOptions = {
-    componentLoader: ComponentLoader
+    componentLoader?: ComponentLoader
     source: string
     key: string
 }

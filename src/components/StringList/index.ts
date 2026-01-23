@@ -1,2 +1,3 @@
-export * from "./StringList.js";
-export * from "./StringListShow.js";
+export { StringList } from "./StringList.js";
+export { StringListShow } from "./StringListShow.js";
+export { StringListFeature } from "./StringListFeature.js";

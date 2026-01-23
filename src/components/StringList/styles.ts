@@ -16,8 +16,9 @@ export const StyledInputWrapper = styled(Box)`
   display: flex;
 `;
 
-export const StyledListWrapper = styled(Box)`
-  margin-bottom: 15px;
+export const StyledListWrapper = styled(Box)<{ $hasItems?: boolean }>`
+  margin-bottom: ${({ $hasItems }: { $hasItems?: boolean }) => ($hasItems ? "15px" : "4px")};
+  min-height: 0;
 `;
 
 export const StyledLabel = styled.div`

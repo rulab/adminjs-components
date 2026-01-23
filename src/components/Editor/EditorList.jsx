@@ -2,10 +2,10 @@ import React from "react";
 
 import { theme } from "@adminjs/design-system";
 import { ThemeProvider } from "styled-components";
-import { parseHtml } from "../../utils/parseHtml";
-import { StyledEditorViewWrapper } from "./styles";
+import { parseHtml } from "../../utils/parseHtml.js";
+import { StyledEditorViewWrapper } from "./styles.js";
 
-const EditorList = ({ property, record }) => {
+export const EditorList = ({ property, record }) => {
   const htmlContent = parseHtml(record.params[property.path]);
 
   return (

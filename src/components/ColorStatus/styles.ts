@@ -1,12 +1,13 @@
 import { styled } from "@adminjs/design-system/styled-components";
 
 export const ColorStatusWrapper = styled.div`
-  margin-bottom: 24px;
+  margin-bottom: 45px;
 `;
 
 export const Label = styled.div`
   font-size: 12px;
   margin-bottom: 8px;
+  text-transform: capitalize;
 `;
 
 export const ShowLabel = styled.div`

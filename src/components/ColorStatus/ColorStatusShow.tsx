@@ -5,16 +5,18 @@ import { ColorStatusBadgeWrapper, ColorStatusBadge, ShowLabel } from "./styles";
 
 import type { AvailableValueType } from "./types";
 
-const ColorStatusShow: FC<ShowPropertyProps> = ({ property, record }) => {
+export const ColorStatusShow: FC<ShowPropertyProps> = ({ property, record }) => {
   const currentOption = property.availableValues?.find(
     (item) => item.value === record.params[property.path],
   ) as AvailableValueType;
+  const currentValue = record.params[property.path];
+  const displayValue = currentOption?.label ?? currentValue;
 
   return (
     <ColorStatusBadgeWrapper>
-      <ShowLabel>{property.path}</ShowLabel>
-      <ColorStatusBadge color={currentOption.color}>
-        {record.params[property.path]}
+      <ShowLabel>{property.label ?? property.path}</ShowLabel>
+      <ColorStatusBadge color={currentOption?.color}>
+        {displayValue}
       </ColorStatusBadge>
     </ColorStatusBadgeWrapper>
   );
