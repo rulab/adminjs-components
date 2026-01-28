@@ -42,7 +42,7 @@ export const Editor = ({
   const [jsonData, setJsonData] = useState();
   const isSavedData = Boolean(record?.params?.[property.path]);
   const holderId = editorId || property?.props?.editorId || `editor-${property.path}`;
-  const uploadAction = property?.props?.uploadAction;
+  const uploadAction = property?.custom?.uploadAction ?? property?.props?.uploadAction;
   const resourceId = resource?.id;
 
   const ref = useRef();

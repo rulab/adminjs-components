@@ -28,7 +28,6 @@ export const SlugEdit: FC<CustomSlugTypes> = ({
   resource,
   onChange,
 }) => {
-  console.log("✅ SlugEdit loaded", { property });
   type SlugCustomProperty = {
     source: string,
     key: string
