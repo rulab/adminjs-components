@@ -13,3 +13,4 @@ export { StringListFeature } from "./StringList/StringListFeature.js";
 export { SlugFeature } from "./Slug/SlugFeature.js";
 export { TabsFeature } from "./Tabs/TabsFeature.js";
 export { PreviewFeature } from "./Preview/PreviewFeature.js";
+export { UuidFeature } from "./Uuid/UuidFeature.js";
