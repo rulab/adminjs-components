@@ -1,5 +1,7 @@
 # adminjs-components
 
+<a id="top"></a>
+
 Prebuilt AdminJS components and features for common UI needs: colored status
 badges, slug and UUID generation, Editor.js content, sortable string lists, tabs
 layout, and record preview.
@@ -46,6 +48,14 @@ You can also pass `componentLoader` into every feature instead of calling
 
 ## Components and features
 
+- [ColorStatus](#colorstatus)
+- [Slug](#slug)
+- [UUID](#uuid)
+- [Editor](#editor)
+- [StringList](#stringlist)
+- [Tabs](#tabs)
+- [Preview](#preview)
+
 ### ColorStatus
 
 Renders a colored badge in edit/list/show based on a list of available values.
@@ -68,6 +78,8 @@ features: [
 ]
 ```
 
+[Back to top](#top)
+
 ### Slug
 
 Generates a slug from another field and stores it in the target property.
@@ -85,6 +97,8 @@ features: [
 ]
 ```
 
+[Back to top](#top)
+
 ### UUID
 
 Adds a UUID field with a "Generate UUID" button in edit view.
@@ -100,6 +114,8 @@ features: [
   }),
 ]
 ```
+
+[Back to top](#top)
 
 ### Editor
 
@@ -123,6 +139,8 @@ features: [
 ]
 ```
 
+[Back to top](#top)
+
 ### StringList
 
 Sortable list stored as a single string (comma-separated by default).
@@ -138,6 +156,8 @@ features: [
   }),
 ]
 ```
+
+[Back to top](#top)
 
 ### Tabs
 
@@ -163,6 +183,8 @@ properties: {
 },
 ```
 
+[Back to top](#top)
+
 ### Preview
 
 Adds a record action that renders an iframe preview. The `url` can include
@@ -178,6 +200,8 @@ features: [
   }),
 ]
 ```
+
+[Back to top](#top)
 
 ## Utilities
 
