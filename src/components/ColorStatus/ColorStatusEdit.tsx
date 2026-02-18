@@ -9,6 +9,9 @@ import { ColorStatusWrapper, Label } from "./styles.js";
 import type { AvailableValueType } from "./types.js";
 
 type ColorStatusTypes = Omit<EditPropertyProps, "where" | "resource">;
+type SelectAvailableValueType = Omit<AvailableValueType, "value"> & {
+  value: string | null;
+};
 
 const dot = (color = "transparent") => ({
   alignItems: "center",
@@ -25,7 +28,7 @@ const dot = (color = "transparent") => ({
   },
 });
 
-const colorStyles: StylesConfig<AvailableValueType> = {
+const colorStyles: StylesConfig<SelectAvailableValueType> = {
   control: (styles) => ({ ...styles, backgroundColor: "white" }),
   option: (styles, { data, isDisabled, isFocused, isSelected }) => {
     const color = chroma(data.color);
@@ -58,7 +61,7 @@ export const ColorStatusEdit: FC<ColorStatusTypes> = ({
   record,
   onChange,
 }) => {
-  const availableValues = property.availableValues as AvailableValueType[];
+  const availableValues = property.availableValues as SelectAvailableValueType[];
   const nullable = Boolean(
     (property as unknown as { custom?: { nullable?: boolean } }).custom?.nullable,
   );
@@ -67,17 +70,17 @@ export const ColorStatusEdit: FC<ColorStatusTypes> = ({
 
   const currentOption = availableValues.find(
     (item) => item.value === currentValue,
-  ) as AvailableValueType;
+  ) as SelectAvailableValueType;
   const initialOption = currentOption ?? (!nullable && isNewRecord ? availableValues[0] : null);
 
   const [selectOption, setCurrentOption] = useState<
-    SingleValue<AvailableValueType>
+    SingleValue<SelectAvailableValueType>
   >(initialOption);
 
   const handleSelectChange = (
-    option: SingleValue<AvailableValueType> | MultiValue<AvailableValueType>,
+    option: SingleValue<SelectAvailableValueType> | MultiValue<SelectAvailableValueType>,
   ) => {
-    setCurrentOption(option as SingleValue<AvailableValueType>);
+    setCurrentOption(option as SingleValue<SelectAvailableValueType>);
   };
 
   useEffect(() => {

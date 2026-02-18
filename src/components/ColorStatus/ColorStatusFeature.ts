@@ -9,11 +9,15 @@ type ColorStatusOptions = {
   nullable?: boolean;
 };
 
+type NullableAvailableValueType = Omit<AvailableValueType, "value"> & {
+  value: string | null;
+};
+
 const COMPONENT_NAME = "ColorStatus";
 
 export const ColorStatusFeature = (config: ColorStatusOptions): FeatureType => {
   const { componentLoader, key, availableValues = [], nullable = false } = config;
-  const values = nullable
+  const values: NullableAvailableValueType[] = nullable
     ? [{ value: null, label: "", color: "#ffffff" }, ...availableValues]
     : availableValues;
 
@@ -37,7 +41,7 @@ export const ColorStatusFeature = (config: ColorStatusOptions): FeatureType => {
     properties: {
       [key]: {
         isVisible: { filter: true, show: true, edit: true, list: true },
-        availableValues: values,
+        availableValues: values as unknown as { value: string | number; label?: string }[],
         custom: {
           nullable,
         },
