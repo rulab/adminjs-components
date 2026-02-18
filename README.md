@@ -126,6 +126,7 @@ features: [
 ### StringList
 
 Sortable list stored as a single string (comma-separated by default).
+Use `separator` to override the delimiter used for storing and rendering values.
 
 ```ts
 import { StringListFeature } from "@rulab/adminjs-components";
@@ -133,6 +134,7 @@ import { StringListFeature } from "@rulab/adminjs-components";
 features: [
   StringListFeature({
     key: "facts",
+    separator: "|", // optional, default "|"
   }),
 ]
 ```

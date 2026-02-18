@@ -5,7 +5,8 @@ import { ThemeProvider } from "styled-components";
 import { theme } from "@adminjs/design-system";
 
 import { StyledShowLabel, StyledShowWrapper, StyledListItem } from "./styles.js";
-import { separator } from "./constants.js";
+
+const DEFAULT_SEPARATOR = "|";
 
 interface StringListShowPropsType extends ShowPropertyProps {
   stringListSeparator?: string;
@@ -14,16 +15,20 @@ interface StringListShowPropsType extends ShowPropertyProps {
 export const StringListShow: FC<StringListShowPropsType> = ({
   property,
   record,
-  stringListSeparator = separator,
+  stringListSeparator = DEFAULT_SEPARATOR,
 }) => {
+  const separatorValue =
+    (property.props?.stringListSeparator as string | undefined) ?? stringListSeparator;
+  const value = record.params[property.path];
+
   return (
     <ThemeProvider theme={theme}>
       <StyledShowWrapper>
         <StyledShowLabel>{property.label ?? property.path}</StyledShowLabel>
-        {record.params.facts && (
+        {value && (
           <ul>
-            {record.params.facts
-              .split(stringListSeparator)
+            {value
+              .split(separatorValue)
               .map((item: string, index: number) => (
                 <StyledListItem key={index}>{`- ${item}`}</StyledListItem>
               ))}
