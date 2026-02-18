@@ -6,12 +6,16 @@ type ColorStatusOptions = {
   componentLoader?: ComponentLoader;
   key: string;
   availableValues?: AvailableValueType[];
+  nullable?: boolean;
 };
 
 const COMPONENT_NAME = "ColorStatus";
 
 export const ColorStatusFeature = (config: ColorStatusOptions): FeatureType => {
-  const { componentLoader, key, availableValues = [] } = config;
+  const { componentLoader, key, availableValues = [], nullable = false } = config;
+  const values = nullable
+    ? [{ value: null, label: "", color: "#ffffff" }, ...availableValues]
+    : availableValues;
 
   const editComponent = bundleComponent(
     componentLoader,
@@ -33,7 +37,10 @@ export const ColorStatusFeature = (config: ColorStatusOptions): FeatureType => {
     properties: {
       [key]: {
         isVisible: { filter: true, show: true, edit: true, list: true },
-        availableValues,
+        availableValues: values,
+        custom: {
+          nullable,
+        },
         components: {
           edit: editComponent,
           list: listComponent,

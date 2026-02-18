@@ -59,14 +59,20 @@ export const ColorStatusEdit: FC<ColorStatusTypes> = ({
   onChange,
 }) => {
   const availableValues = property.availableValues as AvailableValueType[];
+  const nullable = Boolean(
+    (property as unknown as { custom?: { nullable?: boolean } }).custom?.nullable,
+  );
+  const isNewRecord = !record.id;
+  const currentValue = record.params[property.path];
 
   const currentOption = availableValues.find(
-    (item) => item.value === record.params[property.path],
+    (item) => item.value === currentValue,
   ) as AvailableValueType;
+  const initialOption = currentOption ?? (!nullable && isNewRecord ? availableValues[0] : null);
 
   const [selectOption, setCurrentOption] = useState<
-    SingleValue<AvailableValueType> | undefined
-  >(currentOption);
+    SingleValue<AvailableValueType>
+  >(initialOption);
 
   const handleSelectChange = (
     option: SingleValue<AvailableValueType> | MultiValue<AvailableValueType>,
@@ -84,9 +90,9 @@ export const ColorStatusEdit: FC<ColorStatusTypes> = ({
       <Select
         className="basic-single"
         classNamePrefix="select"
-        defaultValue={selectOption ?? availableValues[0]}
+        value={selectOption}
         onChange={handleSelectChange}
-        isClearable={true}
+        isClearable={nullable}
         name="color"
         options={availableValues}
         styles={colorStyles}

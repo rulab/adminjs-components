@@ -49,6 +49,8 @@ You can also pass `componentLoader` into every feature instead of calling
 ### ColorStatus
 
 Renders a colored badge in edit/list/show based on a list of available values.
+By default (`nullable: false`) the first option is auto-selected in new records.
+Set `nullable: true` to allow an empty value.
 
 ```ts
 import { ColorStatusFeature } from "@rulab/adminjs-components";
@@ -56,6 +58,7 @@ import { ColorStatusFeature } from "@rulab/adminjs-components";
 features: [
   ColorStatusFeature({
     key: "status",
+    nullable: false, // optional, default false
     availableValues: [
       { value: "draft", label: "Draft", color: "#64748b" },
       { value: "review", label: "In review", color: "#f59e0b" },

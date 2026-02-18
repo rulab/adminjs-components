@@ -1,5 +1,5 @@
 export type AvailableValueType = {
-  value: string;
+  value: string | null;
   label: string;
   color: string;
 };
