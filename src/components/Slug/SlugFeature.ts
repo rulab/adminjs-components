@@ -5,7 +5,7 @@ import SlugOptions from "./SlugOptions.type.js";
 const COMPONENT_NAME = 'Slug'
 
 export const SlugFeature = (config: SlugOptions): FeatureType => {
-    const {componentLoader,source,key} = config
+    const {componentLoader,source,key,button} = config
 
     const editComponent = bundleComponent(componentLoader, COMPONENT_NAME, 'SlugEdit.js')
 
@@ -16,7 +16,7 @@ export const SlugFeature = (config: SlugOptions): FeatureType => {
                 components: {
                     edit: editComponent,
                 },
-                custom: {source,key}
+                custom: {source,key,button}
             },
         },
     })

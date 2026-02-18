@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 import { ShowPropertyProps } from "adminjs";
 
-import { ColorStatusBadge } from "./styles";
+import { ColorStatusBadge } from "./styles.js";
 
-import type { AvailableValueType } from "./types";
+import type { AvailableValueType } from "./types.js";
 
 export const ColorStatusList: FC<ShowPropertyProps> = ({ property, record }) => {
   const currentOption = property.availableValues?.find(

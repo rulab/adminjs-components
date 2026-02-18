@@ -9,7 +9,7 @@ import {
   StyledGenerateButton,
   StyledInputWrapper,
   StyledLabel,
-} from "./styles";
+} from "./styles.js";
 
 type CustomUuidTypes = Omit<EditPropertyProps, "where">;
 
@@ -29,6 +29,7 @@ export const UuidEdit: FC<CustomUuidTypes> = ({
   record,
   onChange,
 }) => {
+  const { custom } = property as unknown as { custom?: { button?: string } };
   const [inputValue, setInputValue] = useState(record.params[property.path] ?? "");
 
   useEffect(() => {
@@ -46,7 +47,7 @@ export const UuidEdit: FC<CustomUuidTypes> = ({
           onChange={handleInput}
         />
         <StyledGenerateButton variant="outlined" onClick={generateUuid}>
-          Generate UUID
+          {custom?.button ?? "Generate UUID"}
         </StyledGenerateButton>
       </StyledInputWrapper>
     </ThemeProvider>

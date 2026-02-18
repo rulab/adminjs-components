@@ -4,10 +4,18 @@ import { theme } from "@adminjs/design-system";
 import { ApiClient } from "adminjs";
 
 import { StyledLabel, StyledEditor, StyledEditorWrapper } from "./styles.js";
-
 import { EDITOR_TOOLS } from "./config.js";
 
-const readFileAsBase64 = (file) =>
+type EditorProps = {
+  property: any;
+  record: any;
+  resource: any;
+  onChange?: (path: string, value: string | undefined) => void;
+  onChangeAdmin?: (path: string, value: string | undefined) => void;
+  editorId?: string;
+};
+
+const readFileAsBase64 = (file: File): Promise<string> =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => {
@@ -19,14 +27,14 @@ const readFileAsBase64 = (file) =>
     reader.readAsDataURL(file);
   });
 
-const getEditorData = (record, property) => {
+const getEditorData = (record: any, property: any) => {
   const raw = record?.params?.[property.path];
   if (!raw) {
     return "";
   }
   try {
     return JSON.parse(raw);
-  } catch (error) {
+  } catch {
     return "";
   }
 };
@@ -38,14 +46,14 @@ export const Editor = ({
   onChange,
   onChangeAdmin,
   editorId,
-}) => {
-  const [jsonData, setJsonData] = useState();
+}: EditorProps) => {
+  const [jsonData, setJsonData] = useState<string>();
   const isSavedData = Boolean(record?.params?.[property.path]);
   const holderId = editorId || property?.props?.editorId || `editor-${property.path}`;
   const uploadAction = property?.custom?.uploadAction ?? property?.props?.uploadAction;
   const resourceId = resource?.id;
 
-  const ref = useRef();
+  const ref = useRef<any>();
 
   useEffect(() => {
     const changeHandler = onChange ?? onChangeAdmin;
@@ -58,7 +66,7 @@ export const Editor = ({
     if (!ref.current) {
       const init = async () => {
         const { default: EditorJS } = await import("@editorjs/editorjs");
-        const tools = { ...EDITOR_TOOLS };
+        const tools: Record<string, any> = { ...EDITOR_TOOLS };
         if (uploadAction && resourceId) {
           const { default: ImageTool } = await import("@editorjs/image");
           const api = new ApiClient();
@@ -66,7 +74,7 @@ export const Editor = ({
             class: ImageTool,
             config: {
               uploader: {
-                uploadByFile: async (file) => {
+                uploadByFile: async (file: File) => {
                   const base64 = await readFileAsBase64(file);
                   const response = await api.resourceAction({
                     resourceId,
@@ -94,7 +102,7 @@ export const Editor = ({
           holder: holderId,
           tools,
           data: isSavedData ? getEditorData(record, property) : "",
-          async onChange(api, event) {
+          async onChange(api: any) {
             const data = await api.saver.save();
             setJsonData(JSON.stringify(data));
           },

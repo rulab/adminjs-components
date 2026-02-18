@@ -4,9 +4,9 @@ import { EditPropertyProps } from "adminjs";
 import Select, { MultiValue, SingleValue, StylesConfig } from "react-select";
 import chroma from "chroma-js";
 
-import { ColorStatusWrapper, Label } from "./styles";
+import { ColorStatusWrapper, Label } from "./styles.js";
 
-import type { AvailableValueType } from "./types";
+import type { AvailableValueType } from "./types.js";
 
 type ColorStatusTypes = Omit<EditPropertyProps, "where" | "resource">;
 

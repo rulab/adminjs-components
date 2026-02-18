@@ -10,15 +10,14 @@ import { ThemeProvider } from "styled-components";
 
 import { theme } from "@adminjs/design-system";
 
-import { slugifyTitle } from "../../utils";
+import { slugifyTitle } from "../../utils/index.js";
 
 import {
   StyledCustomInput,
   StyledGenerateButton,
   StyledInputWrapper,
   StyledLabel,
-} from "./styles";
-import SlugOptions from "./SlugOptions.type";
+} from "./styles.js";
 
 type CustomSlugTypes = Omit<EditPropertyProps, "where">;
 
@@ -29,9 +28,10 @@ export const SlugEdit: FC<CustomSlugTypes> = ({
   onChange,
 }) => {
   type SlugCustomProperty = {
-    source: string,
-    key: string
-  }
+    source: string;
+    key: string;
+    button?: string;
+  };
   const { params } = record
   const { custom } = property as unknown as { custom: SlugCustomProperty }
 
@@ -55,7 +55,7 @@ export const SlugEdit: FC<CustomSlugTypes> = ({
           onChange={handleInput}
         />
         <StyledGenerateButton variant="outlined" onClick={generateSlug}>
-          Generate Slug
+          {custom.button ?? "Generate Slug"}
         </StyledGenerateButton>
       </StyledInputWrapper>
     </ThemeProvider>

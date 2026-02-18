@@ -5,15 +5,18 @@ import { ThemeProvider } from "styled-components";
 import { parseHtml } from "../../utils/parseHtml.js";
 import { StyledEditorViewWrapper } from "./styles.js";
 
-export const EditorList = ({ property, record }) => {
+type EditorListProps = {
+  property: any;
+  record: any;
+};
+
+export const EditorList = ({ property, record }: EditorListProps) => {
   const htmlContent = parseHtml(record.params[property.path]);
 
   return (
     <ThemeProvider theme={theme}>
       <StyledEditorViewWrapper>
-        {htmlContent && (
-          <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
-        )}
+        {htmlContent && <div dangerouslySetInnerHTML={{ __html: htmlContent }} />}
       </StyledEditorViewWrapper>
     </ThemeProvider>
   );

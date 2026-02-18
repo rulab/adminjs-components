@@ -1,8 +1,8 @@
 # adminjs-components
 
 Prebuilt AdminJS components and features for common UI needs: colored status
-badges, slug generation, Editor.js content, sortable string lists, tabs layout,
-and record preview.
+badges, slug and UUID generation, Editor.js content, sortable string lists, tabs
+layout, and record preview.
 
 ## Install
 
@@ -68,6 +68,7 @@ features: [
 ### Slug
 
 Generates a slug from another field and stores it in the target property.
+Use `button` to override the generate button label in edit view.
 
 ```ts
 import { SlugFeature } from "@rulab/adminjs-components";
@@ -76,6 +77,23 @@ features: [
   SlugFeature({
     key: "slug",
     source: "title",
+    button: "Create slug", // optional
+  }),
+]
+```
+
+### UUID
+
+Adds a UUID field with a "Generate UUID" button in edit view.
+Use `button` to override the generate button label.
+
+```ts
+import { UuidFeature } from "@rulab/adminjs-components";
+
+features: [
+  UuidFeature({
+    key: "uuid",
+    button: "Generate ID", // optional
   }),
 ]
 ```

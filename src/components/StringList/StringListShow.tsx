@@ -1,11 +1,11 @@
-import React, { memo, useState, useEffect, useRef, FC } from "react";
+import React, { FC } from "react";
 import { ShowPropertyProps } from "adminjs";
 
 import { ThemeProvider } from "styled-components";
 import { theme } from "@adminjs/design-system";
 
-import { StyledShowLabel, StyledShowWrapper, StyledListItem } from "./styles";
-import { separator } from "./constants";
+import { StyledShowLabel, StyledShowWrapper, StyledListItem } from "./styles.js";
+import { separator } from "./constants.js";
 
 interface StringListShowPropsType extends ShowPropertyProps {
   stringListSeparator?: string;
