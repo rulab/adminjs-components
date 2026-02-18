@@ -143,13 +143,14 @@ features: [
 
 Groups edit/show fields into tabs based on property `props.tab` or
 `custom.tab`. Fields without a tab go to a common group.
+`commonTabLabel` is optional and defaults to `"Common"`.
 
 ```ts
 import { TabsFeature } from "@rulab/adminjs-components";
 
 features: [
   TabsFeature({
-    commonTabLabel: "Common",
+    commonTabLabel: "General", // optional, default "Common"
   }),
 ]
 
