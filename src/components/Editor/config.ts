@@ -5,8 +5,6 @@ import Quote from "@editorjs/quote";
 import Table from "@editorjs/table";
 // @ts-ignore
 import AudioPlayer from "editorjs-audio-player";
-// @ts-ignore
-import SimpleVideo from "simple-video-editorjs";
 
 export const EDITOR_TOOLS = {
   paragraph: {
@@ -34,5 +32,4 @@ export const EDITOR_TOOLS = {
     inlineToolbar: true,
   },
   audioPlayer: AudioPlayer,
-  video: SimpleVideo,
 };

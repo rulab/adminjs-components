@@ -67,6 +67,11 @@ export const Editor = ({
       const init = async () => {
         const { default: EditorJS } = await import("@editorjs/editorjs");
         const tools: Record<string, any> = { ...EDITOR_TOOLS };
+        if (typeof window !== "undefined") {
+          // @ts-ignore
+          const videoModule = await import("simple-video-editorjs");
+          tools.video = (videoModule as any).default ?? (videoModule as any);
+        }
         if (uploadAction && resourceId) {
           const { default: ImageTool } = await import("@editorjs/image");
           const api = new ApiClient();
