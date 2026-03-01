@@ -3,8 +3,7 @@ import List from "@editorjs/list";
 import Paragraph from "@editorjs/paragraph";
 import Quote from "@editorjs/quote";
 import Table from "@editorjs/table";
-// @ts-ignore
-import AudioPlayer from "editorjs-audio-player";
+import { MediaPlayer } from "./MediaPlayer.js";
 
 export const EDITOR_TOOLS = {
   paragraph: {
@@ -31,5 +30,5 @@ export const EDITOR_TOOLS = {
     class: Quote,
     inlineToolbar: true,
   },
-  audioPlayer: AudioPlayer,
+  audioPlayer: MediaPlayer,
 };
