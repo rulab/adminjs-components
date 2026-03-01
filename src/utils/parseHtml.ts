@@ -15,6 +15,17 @@ type AudioPlayerBlockType = {
   };
 };
 
+type VideoBlockType = {
+  type: "video";
+  data: {
+    url: string;
+    caption?: string;
+    autoplay?: boolean;
+    controls?: boolean;
+    muted?: boolean;
+  };
+};
+
 const tableParser = (block: TableBlockType) => {
   const rows = block.data.content.map((row, index) => {
     const tableHtml = [];
@@ -38,13 +49,23 @@ const tableParser = (block: TableBlockType) => {
 };
 
 const audioPlayerParser = (block: AudioPlayerBlockType) => {
-  return `<audio controls src={${block.data.src}} />`;
+  return `<audio controls src="${block.data.src}"></audio>`;
+};
+
+const videoParser = (block: VideoBlockType) => {
+  const controls = block.data.controls === false ? "" : " controls";
+  const autoplay = block.data.autoplay ? " autoplay" : "";
+  const muted = block.data.muted ? " muted" : "";
+  const caption = block.data.caption ? `<figcaption>${block.data.caption}</figcaption>` : "";
+
+  return `<figure><video src="${block.data.url}"${controls}${autoplay}${muted}></video>${caption}</figure>`;
 };
 
 export const parseHtml = (jsonData: string) => {
   const edjsParser = edjsHTML({
     table: tableParser,
     audioPlayer: audioPlayerParser,
+    video: videoParser,
   });
 
   try {

@@ -120,7 +120,7 @@ features: [
 ### Editor
 
 Editor.js field for rich content. Supports optional image upload via
-`@adminjs/upload` provider.
+`@adminjs/upload` provider, plus built-in audio and video blocks.
 
 ```ts
 import { EditorFeature } from "@rulab/adminjs-components";
