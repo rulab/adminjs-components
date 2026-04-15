@@ -20,3 +20,4 @@ export type {
   SortableListOptions,
   SortableListSortDirection,
 } from "./SortableList/SortableListFeature.js";
+export { SingletonFeature } from "./Singleton/SingletonFeature.js";

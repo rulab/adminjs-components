@@ -4,7 +4,7 @@
 
 Prebuilt AdminJS components and features for common UI needs: colored status
 badges, slug and UUID generation, Editor.js content, sortable string lists,
-drag-and-drop list ordering, tabs layout, and record preview.
+drag-and-drop list ordering, singleton resources, tabs layout, and record preview.
 
 ## Install
 
@@ -48,6 +48,7 @@ You can also pass `componentLoader` into every feature instead of calling
 
 ## Components and features
 
+- [Singleton](#singleton) — register **first** when used with other features
 - [ColorStatus](#colorstatus)
 - [Slug](#slug)
 - [UUID](#uuid)
@@ -56,6 +57,35 @@ You can also pass `componentLoader` into every feature instead of calling
 - [SortableList](#sortablelist)
 - [Tabs](#tabs)
 - [Preview](#preview)
+
+### Singleton
+
+Makes a resource behave as a **singleton**: opening the **list** redirects to
+**new** when there are no rows, to **edit** when there is exactly one row, or
+shows the normal list with an error notice when more than one row exists.
+
+**Feature order:** add `SingletonFeature()` **first** in the resource `features`
+array when you combine it with other features. AdminJS merges `list.after`
+hooks in registration order; if another feature has already registered
+`list.after` before Singleton applies, singleton behaviour is turned off and you
+get a notice asking you to move Singleton earlier. That matters especially for
+`@adminjs/upload`, which adds a `list.after` that expects `records` to exist —
+Singleton must merge **before** upload so the hook chain stays correct.
+
+**Exception:** if another feature defines a **custom `list` handler**, register
+`SingletonFeature` **after** that feature so the custom handler still runs as
+intended (see inline comments in the source for details).
+
+```ts
+import { SingletonFeature } from "@rulab/adminjs-components";
+
+features: [
+  SingletonFeature(),
+  // …other features (e.g. EditorFeature with @adminjs/upload, TabsFeature)
+];
+```
+
+[Back to top](#top)
 
 ### ColorStatus
 
