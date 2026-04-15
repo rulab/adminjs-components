@@ -14,3 +14,9 @@ export { SlugFeature } from "./Slug/SlugFeature.js";
 export { TabsFeature } from "./Tabs/TabsFeature.js";
 export { PreviewFeature } from "./Preview/PreviewFeature.js";
 export { UuidFeature } from "./Uuid/UuidFeature.js";
+export { SortableList } from "./SortableList/SortableList.js";
+export { SortableListFeature } from "./SortableList/SortableListFeature.js";
+export type {
+  SortableListOptions,
+  SortableListSortDirection,
+} from "./SortableList/SortableListFeature.js";

@@ -3,8 +3,8 @@
 <a id="top"></a>
 
 Prebuilt AdminJS components and features for common UI needs: colored status
-badges, slug and UUID generation, Editor.js content, sortable string lists, tabs
-layout, and record preview.
+badges, slug and UUID generation, Editor.js content, sortable string lists,
+drag-and-drop list ordering, tabs layout, and record preview.
 
 ## Install
 
@@ -53,6 +53,7 @@ You can also pass `componentLoader` into every feature instead of calling
 - [UUID](#uuid)
 - [Editor](#editor)
 - [StringList](#stringlist)
+- [SortableList](#sortablelist)
 - [Tabs](#tabs)
 - [Preview](#preview)
 
@@ -155,6 +156,27 @@ features: [
     separator: "|", // optional, default "|"
   }),
 ]
+```
+
+[Back to top](#top)
+
+### SortableList
+
+Replaces the default **list** view with a drag-and-drop table so you can reorder
+records. New positions are saved to a numeric property on each record (default
+`sort`) via a hidden resource action. The resource is sorted by that field by
+default unless you already set `sort` in resource options.
+
+```ts
+import { SortableListFeature } from "@rulab/adminjs-components";
+
+features: [
+  SortableListFeature({
+    sortField: "sort", // optional, default "sort" — must exist on your model
+    reorderActionName: "sortableListReorder", // optional, default shown
+    direction: "ASC", // optional: "ASC" | "DESC" — how order maps to numbers per page
+  }),
+];
 ```
 
 [Back to top](#top)
