@@ -6,6 +6,13 @@ import { ApiClient } from "adminjs";
 import { StyledLabel, StyledEditor, StyledEditorWrapper } from "./styles.js";
 import { EDITOR_TOOLS } from "./config.js";
 
+type EditorUploadResult = {
+  url: string;
+  name: string;
+  size: number;
+  extension: string;
+};
+
 type EditorProps = {
   property: any;
   record: any;
@@ -26,6 +33,47 @@ const readFileAsBase64 = (file: File): Promise<string> =>
     reader.onerror = reject;
     reader.readAsDataURL(file);
   });
+
+const extensionFromFilename = (name: string): string => {
+  const i = name.lastIndexOf(".");
+  if (i <= 0 || i === name.length - 1) {
+    return "";
+  }
+  return name.slice(i + 1).toLowerCase();
+};
+
+const uploadFileViaEditorAction = async (
+  api: ApiClient,
+  resourceId: string,
+  uploadAction: string,
+  file: File,
+): Promise<EditorUploadResult | null> => {
+  const base64 = await readFileAsBase64(file);
+  const response = await api.resourceAction({
+    resourceId,
+    actionName: uploadAction,
+    data: {
+      file: {
+        name: file.name,
+        type: file.type,
+        base64,
+      },
+    },
+  });
+  const data = response?.data?.data as
+    | { url?: string; name?: string; size?: number; extension?: string }
+    | undefined;
+  const url = data?.url;
+  if (!url) {
+    return null;
+  }
+  return {
+    url,
+    name: data?.name ?? file.name,
+    size: data?.size ?? file.size,
+    extension: data?.extension ?? extensionFromFilename(file.name),
+  };
+};
 
 const getEditorData = (record: any, property: any) => {
   const raw = record?.params?.[property.path];
@@ -69,29 +117,52 @@ export const Editor = ({
         const tools: Record<string, any> = { ...EDITOR_TOOLS };
         if (uploadAction && resourceId) {
           const { default: ImageTool } = await import("@editorjs/image");
+          const { default: AttachesTool } = await import("@editorjs/attaches");
           const api = new ApiClient();
           tools.image = {
             class: ImageTool,
             config: {
               uploader: {
                 uploadByFile: async (file: File) => {
-                  const base64 = await readFileAsBase64(file);
-                  const response = await api.resourceAction({
+                  const uploaded = await uploadFileViaEditorAction(
+                    api,
                     resourceId,
-                    actionName: uploadAction,
-                    data: {
-                      file: {
-                        name: file.name,
-                        type: file.type,
-                        base64,
-                      },
-                    },
-                  });
-                  const url = response?.data?.data?.url;
-                  if (!url) {
+                    uploadAction,
+                    file,
+                  );
+                  if (!uploaded) {
                     return { success: 0 };
                   }
-                  return { success: 1, file: { url } };
+                  return { success: 1, file: { url: uploaded.url } };
+                },
+              },
+            },
+          };
+          tools.attaches = {
+            class: AttachesTool,
+            config: {
+              types: "*",
+              buttonText: "Attach file",
+              uploader: {
+                uploadByFile: async (file: File) => {
+                  const uploaded = await uploadFileViaEditorAction(
+                    api,
+                    resourceId,
+                    uploadAction,
+                    file,
+                  );
+                  if (!uploaded) {
+                    return { success: 0 };
+                  }
+                  return {
+                    success: 1,
+                    file: {
+                      url: uploaded.url,
+                      name: uploaded.name,
+                      size: uploaded.size,
+                      extension: uploaded.extension,
+                    },
+                  };
                 },
               },
             },

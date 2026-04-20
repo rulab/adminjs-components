@@ -25,6 +25,10 @@ export const EditorFeature = (config: EditorOptions): FeatureType => {
   const listComponent = bundleComponent(componentLoader, COMPONENT_NAME, "EditorList.js");
   const showComponent = bundleComponent(componentLoader, COMPONENT_NAME, "EditorShow.js");
 
+  /**
+   * `editorUpload` returns `data.url` for `@editorjs/image`, and extended `data` for
+   * `@editorjs/attaches` (name, size, extension alongside url).
+   */
   return buildFeature({
     actions: uploadProvider
       ? {
@@ -76,7 +80,14 @@ export const EditorFeature = (config: EditorOptions): FeatureType => {
                 };
               }
 
-              return { data: { url } };
+              return {
+                data: {
+                  url,
+                  name: originalName,
+                  size: buffer.length,
+                  extension: fileExtension(originalName),
+                },
+              };
             },
           },
         }
@@ -101,6 +112,14 @@ const slugifyFilename = (name: string) => {
   const ext = lastDot > 0 ? name.slice(lastDot) : "";
   const slug = slugifyTitle(base) || "file";
   return `${slug}${ext}`;
+};
+
+const fileExtension = (name: string): string => {
+  const lastDot = name.lastIndexOf(".");
+  if (lastDot <= 0 || lastDot === name.length - 1) {
+    return "";
+  }
+  return name.slice(lastDot + 1).toLowerCase();
 };
 
 export default EditorFeature;

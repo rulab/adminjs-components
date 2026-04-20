@@ -26,6 +26,29 @@ type VideoBlockType = {
   };
 };
 
+type AttachesBlockType = {
+  type: "attaches";
+  data: {
+    title?: string;
+    file: {
+      url: string;
+      name?: string;
+      size?: number;
+      extension?: string;
+    };
+  };
+};
+
+const escapeHtml = (text: string): string =>
+  text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+
+const escapeAttr = (text: string): string =>
+  String(text).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+
 const tableParser = (block: TableBlockType) => {
   const rows = block.data.content.map((row, index) => {
     const tableHtml = [];
@@ -61,11 +84,23 @@ const videoParser = (block: VideoBlockType) => {
   return `<figure><video src="${block.data.url}"${controls}${autoplay}${muted}></video>${caption}</figure>`;
 };
 
+const attachesParser = (block: AttachesBlockType) => {
+  const { file, title } = block.data;
+  const href = file?.url ?? "";
+  const linkText = title?.trim() || file?.name || "Download";
+  const meta =
+    file?.size != null
+      ? ` <span class="editor-attaches-meta">(${escapeHtml(String(file.size))} bytes)</span>`
+      : "";
+  return `<p class="editor-attaches"><a href="${escapeAttr(href)}" download>${escapeHtml(linkText)}</a>${meta}</p>`;
+};
+
 export const parseHtml = (jsonData: string) => {
   const edjsParser = edjsHTML({
     table: tableParser,
     audioPlayer: audioPlayerParser,
     video: videoParser,
+    attaches: attachesParser,
   });
 
   try {
