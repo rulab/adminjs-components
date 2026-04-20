@@ -6,6 +6,7 @@ export const slugifyTitle = (title: string) => {
     remove: /[*+~.()'"!:@]/g,
     lower: true,
     locale: "vi",
+    strict: true,
     trim: true,
   });
 };
