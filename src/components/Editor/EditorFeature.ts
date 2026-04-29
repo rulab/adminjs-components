@@ -65,14 +65,14 @@ export const EditorFeature = (config: EditorOptions): FeatureType => {
               } finally {
                 await fs.unlink(tempPath).catch(() => undefined);
               }
-              const baseUrl = uploadProvider.opts?.baseUrl;
-              const url = baseUrl
-                ? `${baseUrl.replace(/\/$/, "")}/${key}`
-                : await uploadProvider.path(
-                    key,
-                    uploadProvider.bucket,
-                    context as ActionContext,
-                  );
+              // Always resolve the public URL via the provider. Concatenating
+              // `opts.baseUrl + key` skips the bucket segment (e.g. MinIO paths are
+              // `bucket/key` while `path()` returns `base/bucket/encodedKey`).
+              const url = await uploadProvider.path(
+                key,
+                uploadProvider.bucket,
+                context as ActionContext,
+              );
               if (!url) {
                 return {
                   data: { error: "Upload failed." },

@@ -1,6 +1,6 @@
 {
   "name": "@rulab/adminjs-components",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Prebuilt AdminJS features for common UI needs.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
