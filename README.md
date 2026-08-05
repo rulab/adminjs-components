@@ -3,8 +3,9 @@
 <a id="top"></a>
 
 Prebuilt AdminJS components and features for common UI needs: colored status
-badges, slug and UUID generation, Editor.js content, sortable string lists,
-drag-and-drop list ordering, singleton resources, tabs layout, and record preview.
+badges, slug and UUID generation, Editor.js content (images and file attachments),
+sortable string lists, drag-and-drop list ordering, singleton resources, tabs
+layout, record preview, and QR codes for templated URLs.
 
 ## Install
 
@@ -57,6 +58,7 @@ You can also pass `componentLoader` into every feature instead of calling
 - [SortableList](#sortablelist)
 - [Tabs](#tabs)
 - [Preview](#preview)
+- [QrCode](#qrcode)
 
 ### Singleton
 
@@ -150,8 +152,10 @@ features: [
 
 ### Editor
 
-Editor.js field for rich content. Supports optional image upload via
-`@adminjs/upload` provider, plus built-in audio and video blocks.
+Editor.js field for rich content. With `uploadProvider` (`@adminjs/upload`), the
+editor enables **image** upload (`@editorjs/image`) and **file attachments**
+(`@editorjs/attaches` — downloadable files with an editable title). Built-in
+audio and video blocks are always available.
 
 ```ts
 import { EditorFeature } from "@rulab/adminjs-components";
@@ -165,7 +169,7 @@ const uploadProvider = new BaseProvider({
 features: [
   EditorFeature({
     key: "content",
-    uploadProvider, // optional
+    uploadProvider, // optional — enables Image + Attach file tools
   }),
 ]
 ```
@@ -249,6 +253,35 @@ features: [
   PreviewFeature({
     url: "https://example.com/posts/$id",
     actionName: "preview", // optional
+  }),
+]
+```
+
+[Back to top](#top)
+
+### QrCode
+
+Property on **edit** / **show** that builds a QR code from a URL template
+(`$id`, `$uuid`, `$slug`, … — same `$field` syntax as Preview).
+
+The generation flag is stored in the property named by `key` (empty = not
+generated, ISO timestamp = generated). Use a **different `key` per feature** if
+you need several QR codes on one resource. The QR image itself is not stored in
+the database; it is rendered on the client from the resolved URL.
+
+- **Edit:** if not generated — message + **Generate**; if generated — QR image +
+  **Download** (with icon). Save the record after Generate so the flag persists.
+- **Show:** view-only (message or QR image, no buttons).
+
+Your entity must have a nullable string column matching `key`.
+
+```ts
+import { QrCodeFeature } from "@rulab/adminjs-components";
+
+features: [
+  QrCodeFeature({
+    key: "homeQr",
+    url: "https://example.com/page/$id/$slug",
   }),
 ]
 ```

@@ -21,3 +21,5 @@ export type {
   SortableListSortDirection,
 } from "./SortableList/SortableListFeature.js";
 export { SingletonFeature } from "./Singleton/SingletonFeature.js";
+export { QrCodeFeature } from "./QrCode/QrCodeFeature.js";
+export type { QrCodeOptions } from "./QrCode/QrCodeFeature.js";
