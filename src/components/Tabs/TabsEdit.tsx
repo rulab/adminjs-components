@@ -12,11 +12,11 @@ import {
   ActionHeader,
 } from "adminjs";
 
-type TabEntry = {
-  id: string;
-  label: string;
-  properties: Array<any>;
-};
+import {
+  DEFAULT_COMMON_TAB_LABEL,
+  groupProperties,
+  resolveCommonTabLabel,
+} from "./tabs-utils.js";
 
 const StyledTabButton = styled.button<{ active: boolean }>`
   background: none;
@@ -63,42 +63,6 @@ const TabButton: React.FC<TabButtonProps> = ({ onClick, active, tabId, role, chi
   </StyledTabButton>
 );
 
-const DEFAULT_COMMON_LABEL = "Common";
-
-const buildTabId = (label: string) =>
-  `tab-${label.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-_]/g, "")}`;
-
-const groupProperties = (properties: Array<any>, commonLabel: string): TabEntry[] => {
-  const commonProps: Array<any> = [];
-  const tabs = new Map<string, Array<any>>();
-
-  properties.forEach((property) => {
-    const tab = property?.props?.tab ?? property?.custom?.tab;
-    if (tab) {
-      if (!tabs.has(tab)) {
-        tabs.set(tab, []);
-      }
-      tabs.get(tab)?.push(property);
-    } else {
-      commonProps.push(property);
-    }
-  });
-
-  const entries: TabEntry[] = [
-    { id: "common", label: commonLabel, properties: commonProps },
-  ];
-
-  tabs.forEach((props, label) => {
-    entries.push({
-      id: buildTabId(label),
-      label,
-      properties: props,
-    });
-  });
-
-  return entries;
-};
-
 export const TabsEdit: FC<ActionProps> = (props) => {
   const { record: initialRecord, resource, action } = props;
   const {
@@ -126,9 +90,7 @@ export const TabsEdit: FC<ActionProps> = (props) => {
     return false;
   };
 
-  const commonLabel =
-    (resource as any)?.options?.properties?.__tabsCommonLabel?.custom?.value ??
-    DEFAULT_COMMON_LABEL;
+  const commonLabel = resolveCommonTabLabel(resource, DEFAULT_COMMON_TAB_LABEL);
 
   const tabs = useMemo(
     () => groupProperties(resource.editProperties, commonLabel),

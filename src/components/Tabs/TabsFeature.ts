@@ -1,5 +1,6 @@
 import { buildFeature, ComponentLoader, FeatureType } from "adminjs";
 import { bundleComponent } from "../../utils/bundle-component.js";
+import { TABS_COMMON_LABEL_PROPERTY } from "./tabs-utils.js";
 
 type TabsOptions = {
   componentLoader?: ComponentLoader;
@@ -32,7 +33,7 @@ export const TabsFeature = (config: TabsOptions): FeatureType => {
       },
     },
     properties: {
-      __tabsCommonLabel: {
+      [TABS_COMMON_LABEL_PROPERTY]: {
         isVisible: false,
         custom: {
           value: commonTabLabel,
