@@ -40,3 +40,21 @@ export const StyledShowWrapper = styled(Box)`
 export const StyledListItem = styled.li`
   margin-bottom: 5px;
 `;
+
+export const StyledListSpoilerToggle = styled.button`
+  display: inline;
+  margin: 0;
+  margin-left: 2px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: ${({ theme }: { theme: any }) => theme.colors.primary100};
+  cursor: pointer;
+  font: inherit;
+  line-height: inherit;
+  vertical-align: baseline;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
