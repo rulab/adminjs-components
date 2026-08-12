@@ -29,13 +29,19 @@ export const UuidEdit: FC<CustomUuidTypes> = ({
   record,
   onChange,
 }) => {
-  const { translateProperty } = useTranslation();
+  const { translateProperty, translateButton } = useTranslation();
   const { custom } = property as unknown as { custom?: { button?: string } };
   const [inputValue, setInputValue] = useState(record.params[property.path] ?? "");
 
   useEffect(() => {
     onChange(property.path, inputValue);
   }, [inputValue]);
+
+  const buttonLabel =
+    custom?.button ??
+    translateButton("generateUuid", property.resourceId, {
+      defaultValue: "Generate UUID",
+    });
 
   return (
     <ThemeProvider theme={theme}>
@@ -50,7 +56,7 @@ export const UuidEdit: FC<CustomUuidTypes> = ({
           onChange={handleInput}
         />
         <StyledGenerateButton variant="outlined" onClick={generateUuid}>
-          {custom?.button ?? "Generate UUID"}
+          {buttonLabel}
         </StyledGenerateButton>
       </StyledInputWrapper>
     </ThemeProvider>
@@ -67,4 +73,3 @@ export const UuidEdit: FC<CustomUuidTypes> = ({
 };
 
 export default UuidEdit;
-

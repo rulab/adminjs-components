@@ -95,12 +95,15 @@ export const Editor = ({
   onChangeAdmin,
   editorId,
 }: EditorProps) => {
-  const { translateProperty } = useTranslation();
+  const { translateProperty, translateButton } = useTranslation();
   const [jsonData, setJsonData] = useState<string>();
   const isSavedData = Boolean(record?.params?.[property.path]);
   const holderId = editorId || property?.props?.editorId || `editor-${property.path}`;
   const uploadAction = property?.custom?.uploadAction ?? property?.props?.uploadAction;
   const resourceId = resource?.id;
+  const attachFileLabel = translateButton("attachFile", property.resourceId, {
+    defaultValue: "Attach file",
+  });
 
   const ref = useRef<any>();
 
@@ -143,7 +146,7 @@ export const Editor = ({
             class: AttachesTool,
             config: {
               types: "*",
-              buttonText: "Attach file",
+              buttonText: attachFileLabel,
               uploader: {
                 uploadByFile: async (file: File) => {
                   const uploaded = await uploadFileViaEditorAction(

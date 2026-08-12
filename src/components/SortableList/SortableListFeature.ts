@@ -65,7 +65,14 @@ export const SortableListFeature = (config: SortableListOptions): FeatureType =>
             const rawIds = payload?.orderedRecordIds;
             if (!Array.isArray(rawIds) || rawIds.length === 0) {
               return {
-                notice: { message: "Nothing to reorder.", type: "error" },
+                notice: {
+                  message: "sortableListNothingToReorder",
+                  type: "error",
+                  resourceId: context.resource.id(),
+                  options: {
+                    defaultValue: "Nothing to reorder.",
+                  },
+                },
               };
             }
             const page = Number(payload?.page) || 1;
@@ -87,7 +94,14 @@ export const SortableListFeature = (config: SortableListOptions): FeatureType =>
             }
 
             return {
-              notice: { message: "Order updated.", type: "success" },
+              notice: {
+                message: "sortableListOrderUpdated",
+                type: "success",
+                resourceId: context.resource.id(),
+                options: {
+                  defaultValue: "Order updated.",
+                },
+              },
             };
           },
         },

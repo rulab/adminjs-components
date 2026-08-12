@@ -59,12 +59,16 @@ You can also pass `componentLoader` into every feature instead of calling
 - [Tabs](#tabs)
 - [Preview](#preview)
 - [QrCode](#qrcode)
+- [Localization](#localization)
 
 ### Singleton
 
 Makes a resource behave as a **singleton**: opening the **list** redirects to
 **new** when there are no rows, to **edit** when there is exactly one row, or
 shows the normal list with an error notice when more than one row exists.
+
+Notices use i18n keys `messages.singletonTooManyRecords` and
+`messages.singletonFeatureOrderError` (English defaults via `options.defaultValue`).
 
 **Feature order:** add `SingletonFeature()` **first** in the resource `features`
 array when you combine it with other features. AdminJS merges `list.after`
@@ -117,6 +121,8 @@ features: [
 
 Generates a slug from another field and stores it in the target property.
 Use `button` to override the generate button label in edit view.
+Without `button`, the label uses AdminJS i18n key `buttons.generateSlug`
+(default: `"Generate Slug"`).
 
 ```ts
 import { SlugFeature } from "@rulab/adminjs-components";
@@ -134,8 +140,9 @@ features: [
 
 ### UUID
 
-Adds a UUID field with a "Generate UUID" button in edit view.
-Use `button` to override the generate button label.
+Adds a UUID field with a generate button in edit view.
+Use `button` to override the label; otherwise i18n key `buttons.generateUuid`
+(default: `"Generate UUID"`).
 
 ```ts
 import { UuidFeature } from "@rulab/adminjs-components";
@@ -156,6 +163,10 @@ Editor.js field for rich content. With `uploadProvider` (`@adminjs/upload`), the
 editor enables **image** upload (`@editorjs/image`) and **file attachments**
 (`@editorjs/attaches` — downloadable files with an editable title). Built-in
 audio and video blocks are always available.
+
+The attaches tool button uses `buttons.attachFile` (default: `"Attach file"`).
+Upload action notices: `messages.editorNoFileProvided`,
+`messages.editorUploadFailed`.
 
 ```ts
 import { EditorFeature } from "@rulab/adminjs-components";
@@ -184,7 +195,8 @@ Use `separator` to override the delimiter used for **storing** values.
 In the **list** view values are always shown joined with `", "`. If the
 resulting string is longer than `listMaxLength` (default `80`), it is truncated
 with a clickable `...` spoiler; when expanded, a clickable `<` collapses it
-again.
+again. Spoiler `aria-label`s use `messages.stringListExpand` /
+`messages.stringListCollapse`.
 
 ```ts
 import { StringListFeature } from "@rulab/adminjs-components";
@@ -206,6 +218,9 @@ Replaces the default **list** view with a drag-and-drop table so you can reorder
 records. New positions are saved to a numeric property on each record (default
 `sort`) via a hidden resource action. The resource is sorted by that field by
 default unless you already set `sort` in resource options.
+
+Reorder notices: `messages.sortableListNothingToReorder`,
+`messages.sortableListOrderUpdated`.
 
 ```ts
 import { SortableListFeature } from "@rulab/adminjs-components";
@@ -252,6 +267,9 @@ properties: {
 Adds a record action that renders an iframe preview. The `url` can include
 template variables like `$id` or `$slug`.
 
+UI strings: `messages.previewUrlNotConfigured`, `messages.preview`,
+`buttons.back`, `buttons.openInNewTab`.
+
 ```ts
 import { PreviewFeature } from "@rulab/adminjs-components";
 
@@ -281,6 +299,9 @@ the database; it is rendered on the client from the resolved URL.
 
 Your entity must have a nullable string column matching `key`.
 
+UI strings use AdminJS i18n — see [Localization](#localization) for keys
+(`qrCodeNotGenerated`, `generateQrCode`, `downloadQrCode`, …).
+
 ```ts
 import { QrCodeFeature } from "@rulab/adminjs-components";
 
@@ -291,6 +312,60 @@ features: [
   }),
 ]
 ```
+
+[Back to top](#top)
+
+## Localization
+
+User-facing strings in this package use AdminJS
+`translateMessage` / `translateButton` (and notices pass camelCase keys with
+`options.defaultValue`). Override globally or per resource:
+
+```ts
+locale: {
+  translations: {
+    en: {
+      messages: {
+        // QrCode
+        qrCodeNotGenerated: "QR code has not been generated yet.",
+        qrCodeEmptyUrl:
+          "Cannot generate QR code: the URL template resolved to an empty string. Check that referenced fields have values.",
+        qrCodeGenerateFailed: "Failed to generate QR code.",
+        // Preview
+        previewUrlNotConfigured: "Preview URL is not configured.",
+        preview: "Preview",
+        // StringList list spoiler
+        stringListExpand: "Expand",
+        stringListCollapse: "Collapse",
+        // Singleton
+        singletonTooManyRecords:
+          "Singleton mode requires exactly one record. Delete or merge the extra records so that only one remains for this resource to work correctly.",
+        singletonFeatureOrderError:
+          "SingletonFeature is registered too late: another feature already added a `list.after` hook. Move SingletonFeature() earlier in the `features` array.",
+        // SortableList
+        sortableListNothingToReorder: "Nothing to reorder.",
+        sortableListOrderUpdated: "Order updated.",
+        // Editor upload action
+        editorNoFileProvided: "No file provided.",
+        editorUploadFailed: "Upload failed.",
+      },
+      buttons: {
+        generateQrCode: "Generate",
+        downloadQrCode: "Download",
+        generateSlug: "Generate Slug",
+        generateUuid: "Generate UUID",
+        attachFile: "Attach file",
+        back: "< Back",
+        openInNewTab: "Open in new tab",
+      },
+    },
+  },
+}
+```
+
+Resource-scoped keys also work, e.g.
+`resources.{resourceId}.messages.qrCodeNotGenerated`,
+`resources.{resourceId}.buttons.generateQrCode`.
 
 [Back to top](#top)
 

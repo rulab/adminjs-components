@@ -8,10 +8,13 @@ import { theme } from "@adminjs/design-system";
 import { resolveTemplate } from "./resolve-template.js";
 import { useQrDataUrl } from "./use-qr-data-url.js";
 
-const NOT_GENERATED_MESSAGE = "QR code has not been generated yet.";
+const DEFAULT_NOT_GENERATED = "QR code has not been generated yet.";
+const DEFAULT_GENERATE_FAILED = "Failed to generate QR code.";
 
 export const QrCodeShow: FC<ShowPropertyProps> = ({ property, record }) => {
-  const { translateProperty } = useTranslation();
+  const { translateProperty, translateMessage } = useTranslation();
+  const resourceId = property.resourceId;
+
   const urlTemplate =
     (property as { custom?: { urlTemplate?: string } }).custom?.urlTemplate ??
     "";
@@ -28,27 +31,38 @@ export const QrCodeShow: FC<ShowPropertyProps> = ({ property, record }) => {
     isGenerated && Boolean(resolvedUrl),
   );
 
+  const notGeneratedMessage = translateMessage(
+    "qrCodeNotGenerated",
+    resourceId,
+    { defaultValue: DEFAULT_NOT_GENERATED },
+  );
+  const generateFailedMessage = translateMessage(
+    "qrCodeGenerateFailed",
+    resourceId,
+    { defaultValue: DEFAULT_GENERATE_FAILED },
+  );
+
   return (
     <ThemeProvider theme={theme}>
       <Box mb="lg">
         <Text mb="default" fontWeight="bold">
-          {translateProperty(property.label, property.resourceId)}
+          {translateProperty(property.label, resourceId)}
         </Text>
 
-        {!isGenerated && <Text>{NOT_GENERATED_MESSAGE}</Text>}
+        {!isGenerated && <Text>{notGeneratedMessage}</Text>}
 
         {isGenerated && (
           <Box>
             {error && (
               <Text mb="default" color="error">
-                {error}
+                {generateFailedMessage}
               </Text>
             )}
             {dataUrl && (
               <Box mb="default">
                 <img
                   src={dataUrl}
-                  alt={`QR code for ${property.path}`}
+                  alt={translateProperty(property.label, resourceId)}
                   width={256}
                   height={256}
                 />

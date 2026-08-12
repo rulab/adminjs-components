@@ -30,16 +30,22 @@ const runDefaultListHandler = async (
   );
 
 const TOO_MANY_RECORDS_NOTICE = {
-  message:
-    "Singleton mode requires exactly one record. Delete or merge the extra records so that only one remains for this resource to work correctly.",
+  message: "singletonTooManyRecords",
   type: "error" as const,
+  options: {
+    defaultValue:
+      "Singleton mode requires exactly one record. Delete or merge the extra records so that only one remains for this resource to work correctly.",
+  },
 };
 
 /** Shown when another feature already registered `list.after` before Singleton merged (wrong order). */
 const FEATURE_ORDER_ERROR_NOTICE = {
-  message:
-    "SingletonFeature is registered too late: another feature already added a `list.after` hook. Move SingletonFeature() earlier in the `features` array.",
+  message: "singletonFeatureOrderError",
   type: "error" as const,
+  options: {
+    defaultValue:
+      "SingletonFeature is registered too late: another feature already added a `list.after` hook. Move SingletonFeature() earlier in the `features` array.",
+  },
 };
 
 const listAfterAlreadyRegistered = (prevOptions: ResourceOptions): boolean =>
@@ -93,10 +99,13 @@ const ensureListRecordsBeforeUploadHooks = async (
 const appendFeatureOrderNotice = async (
   response: ListActionResponse,
   _request: ActionRequest,
-  _context: ActionContext,
+  context: ActionContext,
 ): Promise<ListActionResponse> => ({
   ...response,
-  notice: FEATURE_ORDER_ERROR_NOTICE,
+  notice: {
+    ...FEATURE_ORDER_ERROR_NOTICE,
+    resourceId: context.resource.id(),
+  },
 });
 
 /**
@@ -177,7 +186,10 @@ export const SingletonFeature = (): FeatureType => {
 
             return {
               ...listResponse,
-              notice: TOO_MANY_RECORDS_NOTICE,
+              notice: {
+                ...TOO_MANY_RECORDS_NOTICE,
+                resourceId,
+              },
             };
           },
         },

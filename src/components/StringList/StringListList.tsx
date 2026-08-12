@@ -1,5 +1,6 @@
 import React, { FC, MouseEvent, useState } from "react";
 import type { ShowPropertyProps } from "adminjs";
+import { useTranslation } from "adminjs";
 import { Box, Text } from "@adminjs/design-system";
 
 import { StyledListSpoilerToggle } from "./styles.js";
@@ -19,6 +20,7 @@ export const StringListList: FC<StringListListProps> = ({
   stringListSeparator = DEFAULT_SEPARATOR,
   listMaxLength = DEFAULT_LIST_MAX_LENGTH,
 }) => {
+  const { translateMessage } = useTranslation();
   const [expanded, setExpanded] = useState(false);
 
   const separatorValue =
@@ -64,6 +66,15 @@ export const StringListList: FC<StringListListProps> = ({
     return <Text>{displayText}</Text>;
   }
 
+  const expandLabel = translateMessage("stringListExpand", property.resourceId, {
+    defaultValue: "Expand",
+  });
+  const collapseLabel = translateMessage(
+    "stringListCollapse",
+    property.resourceId,
+    { defaultValue: "Collapse" },
+  );
+
   return (
     <Box
       as="span"
@@ -76,7 +87,7 @@ export const StringListList: FC<StringListListProps> = ({
         type="button"
         onClick={toggle}
         aria-expanded={expanded}
-        aria-label={expanded ? "Collapse" : "Expand"}
+        aria-label={expanded ? collapseLabel : expandLabel}
       >
         {expanded ? "<" : "..."}
       </StyledListSpoilerToggle>

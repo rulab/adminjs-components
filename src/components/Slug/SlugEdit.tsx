@@ -27,7 +27,7 @@ export const SlugEdit: FC<CustomSlugTypes> = ({
   resource,
   onChange,
 }) => {
-  const { translateProperty } = useTranslation();
+  const { translateProperty, translateButton } = useTranslation();
   type SlugCustomProperty = {
     source: string;
     key: string;
@@ -45,6 +45,12 @@ export const SlugEdit: FC<CustomSlugTypes> = ({
     onChange(property.path, inputValue);
   }, [inputValue]);
 
+  const buttonLabel =
+    custom.button ??
+    translateButton("generateSlug", property.resourceId, {
+      defaultValue: "Generate Slug",
+    });
+
   return (
     <ThemeProvider theme={theme}>
       <StyledLabel htmlFor="customSlug">
@@ -58,7 +64,7 @@ export const SlugEdit: FC<CustomSlugTypes> = ({
           onChange={handleInput}
         />
         <StyledGenerateButton variant="outlined" onClick={generateSlug}>
-          {custom.button ?? "Generate Slug"}
+          {buttonLabel}
         </StyledGenerateButton>
       </StyledInputWrapper>
     </ThemeProvider>

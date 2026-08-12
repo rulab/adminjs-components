@@ -40,7 +40,14 @@ export const EditorFeature = (config: EditorOptions): FeatureType => {
               if (!file?.base64) {
                 return {
                   data: { error: "No file provided." },
-                  notice: { message: "No file provided.", type: "error" },
+                  notice: {
+                    message: "editorNoFileProvided",
+                    type: "error",
+                    resourceId: context.resource.id(),
+                    options: {
+                      defaultValue: "No file provided.",
+                    },
+                  },
                 };
               }
 
@@ -76,7 +83,14 @@ export const EditorFeature = (config: EditorOptions): FeatureType => {
               if (!url) {
                 return {
                   data: { error: "Upload failed." },
-                  notice: { message: "Upload failed.", type: "error" },
+                  notice: {
+                    message: "editorUploadFailed",
+                    type: "error",
+                    resourceId: context.resource.id(),
+                    options: {
+                      defaultValue: "Upload failed.",
+                    },
+                  },
                 };
               }
 

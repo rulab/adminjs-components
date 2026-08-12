@@ -10,16 +10,20 @@ import { useQrDataUrl } from "./use-qr-data-url.js";
 
 type QrCodeEditProps = Omit<EditPropertyProps, "where">;
 
-const NOT_GENERATED_MESSAGE = "QR code has not been generated yet.";
-const EMPTY_URL_MESSAGE =
+const DEFAULT_NOT_GENERATED = "QR code has not been generated yet.";
+const DEFAULT_EMPTY_URL =
   "Cannot generate QR code: the URL template resolved to an empty string. Check that referenced fields have values.";
+const DEFAULT_GENERATE_FAILED = "Failed to generate QR code.";
 
 export const QrCodeEdit: FC<QrCodeEditProps> = ({
   property,
   record,
   onChange,
 }) => {
-  const { translateProperty } = useTranslation();
+  const { translateProperty, translateMessage, translateButton } =
+    useTranslation();
+  const resourceId = property.resourceId;
+
   const urlTemplate =
     (property as { custom?: { urlTemplate?: string } }).custom?.urlTemplate ??
     "";
@@ -38,10 +42,30 @@ export const QrCodeEdit: FC<QrCodeEditProps> = ({
     isGenerated && Boolean(resolvedUrl),
   );
 
+  const notGeneratedMessage = translateMessage(
+    "qrCodeNotGenerated",
+    resourceId,
+    { defaultValue: DEFAULT_NOT_GENERATED },
+  );
+  const emptyUrlMessage = translateMessage("qrCodeEmptyUrl", resourceId, {
+    defaultValue: DEFAULT_EMPTY_URL,
+  });
+  const generateFailedMessage = translateMessage(
+    "qrCodeGenerateFailed",
+    resourceId,
+    { defaultValue: DEFAULT_GENERATE_FAILED },
+  );
+  const generateLabel = translateButton("generateQrCode", resourceId, {
+    defaultValue: "Generate",
+  });
+  const downloadLabel = translateButton("downloadQrCode", resourceId, {
+    defaultValue: "Download",
+  });
+
   const handleGenerate = (e: SyntheticEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (!resolvedUrl.trim()) {
-      setLocalError(EMPTY_URL_MESSAGE);
+      setLocalError(emptyUrlMessage);
       return;
     }
     setLocalError(null);
@@ -59,39 +83,41 @@ export const QrCodeEdit: FC<QrCodeEditProps> = ({
     link.click();
   };
 
+  const errorText = localError ?? (qrError ? generateFailedMessage : null);
+
   return (
     <ThemeProvider theme={theme}>
       <Box mb="lg">
         <Text mb="default" fontWeight="bold">
-          {translateProperty(property.label, property.resourceId)}
+          {translateProperty(property.label, resourceId)}
         </Text>
 
         {!isGenerated && (
           <Box>
-            <Text mb="lg">{NOT_GENERATED_MESSAGE}</Text>
-            {(localError || qrError) && (
+            <Text mb="lg">{notGeneratedMessage}</Text>
+            {errorText && (
               <Text mb="default" color="error">
-                {localError ?? qrError}
+                {errorText}
               </Text>
             )}
             <Button variant="primary" onClick={handleGenerate}>
-              Generate
+              {generateLabel}
             </Button>
           </Box>
         )}
 
         {isGenerated && (
           <Box>
-            {(localError || qrError) && (
+            {errorText && (
               <Text mb="default" color="error">
-                {localError ?? qrError}
+                {errorText}
               </Text>
             )}
             {dataUrl && (
               <Box mb="lg">
                 <img
                   src={dataUrl}
-                  alt={`QR code for ${property.path}`}
+                  alt={translateProperty(property.label, resourceId)}
                   width={256}
                   height={256}
                 />
@@ -114,7 +140,7 @@ export const QrCodeEdit: FC<QrCodeEditProps> = ({
                 style={{ gap: 6 }}
               >
                 <Icon icon="Download" />
-                Download
+                {downloadLabel}
               </Box>
             </Button>
           </Box>
