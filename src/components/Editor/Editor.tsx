@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { ThemeProvider } from "styled-components";
 import { theme } from "@adminjs/design-system";
-import { ApiClient } from "adminjs";
+import { ApiClient, useTranslation } from "adminjs";
 
 import { StyledLabel, StyledEditor, StyledEditorWrapper } from "./styles.js";
 import { EDITOR_TOOLS } from "./config.js";
@@ -95,6 +95,7 @@ export const Editor = ({
   onChangeAdmin,
   editorId,
 }: EditorProps) => {
+  const { translateProperty } = useTranslation();
   const [jsonData, setJsonData] = useState<string>();
   const isSavedData = Boolean(record?.params?.[property.path]);
   const holderId = editorId || property?.props?.editorId || `editor-${property.path}`;
@@ -190,7 +191,9 @@ export const Editor = ({
 
   return (
     <ThemeProvider theme={theme}>
-      <StyledLabel>{property.label ?? property.path}</StyledLabel>
+      <StyledLabel>
+        {translateProperty(property.label, property.resourceId)}
+      </StyledLabel>
       <StyledEditorWrapper>
         <StyledEditor id={holderId} />
       </StyledEditorWrapper>

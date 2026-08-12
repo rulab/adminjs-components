@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { ShowPropertyProps } from "adminjs";
+import { ShowPropertyProps, useTranslation } from "adminjs";
 
 import { ThemeProvider } from "styled-components";
 import { theme } from "@adminjs/design-system";
@@ -17,6 +17,7 @@ export const StringListShow: FC<StringListShowPropsType> = ({
   record,
   stringListSeparator = DEFAULT_SEPARATOR,
 }) => {
+  const { translateProperty } = useTranslation();
   const separatorValue =
     (property.props?.stringListSeparator as string | undefined) ?? stringListSeparator;
   const value = record.params[property.path];
@@ -24,7 +25,9 @@ export const StringListShow: FC<StringListShowPropsType> = ({
   return (
     <ThemeProvider theme={theme}>
       <StyledShowWrapper>
-        <StyledShowLabel>{property.label ?? property.path}</StyledShowLabel>
+        <StyledShowLabel>
+          {translateProperty(property.label, property.resourceId)}
+        </StyledShowLabel>
         {value && (
           <ul>
             {value

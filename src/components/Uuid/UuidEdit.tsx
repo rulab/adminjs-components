@@ -1,4 +1,4 @@
-import { EditPropertyProps } from "adminjs";
+import { EditPropertyProps, useTranslation } from "adminjs";
 import React, { ChangeEvent, FC, SyntheticEvent, useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
 
@@ -29,6 +29,7 @@ export const UuidEdit: FC<CustomUuidTypes> = ({
   record,
   onChange,
 }) => {
+  const { translateProperty } = useTranslation();
   const { custom } = property as unknown as { custom?: { button?: string } };
   const [inputValue, setInputValue] = useState(record.params[property.path] ?? "");
 
@@ -38,7 +39,9 @@ export const UuidEdit: FC<CustomUuidTypes> = ({
 
   return (
     <ThemeProvider theme={theme}>
-      <StyledLabel htmlFor="customUuid">{property.label ?? property.path}</StyledLabel>
+      <StyledLabel htmlFor="customUuid">
+        {translateProperty(property.label, property.resourceId)}
+      </StyledLabel>
       <StyledInputWrapper>
         <StyledCustomInput
           id={property.path}

@@ -1,5 +1,5 @@
 import { Button, Input, theme } from "@adminjs/design-system";
-import { EditPropertyProps } from "adminjs";
+import { EditPropertyProps, useTranslation } from "adminjs";
 import React, {
   ChangeEvent,
   FC,
@@ -39,6 +39,7 @@ export const StringList: FC<StringListShowPropsType> = ({
   property,
   stringListSeparator = DEFAULT_SEPARATOR,
 }) => {
+  const { translateProperty } = useTranslation();
   const separatorValue =
     (property.props?.stringListSeparator as string | undefined) ?? stringListSeparator;
   const stringListValue =
@@ -59,7 +60,9 @@ export const StringList: FC<StringListShowPropsType> = ({
 
   return (
     <ThemeProvider theme={theme}>
-      <StyledLabel htmlFor="custom">{property.label ?? property.path}</StyledLabel>
+      <StyledLabel htmlFor="custom">
+        {translateProperty(property.label, property.resourceId)}
+      </StyledLabel>
       <StyledWrapper>
         <StyledListWrapper $hasItems={list.length > 0}>
           <SortableList

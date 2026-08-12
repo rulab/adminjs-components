@@ -1,5 +1,6 @@
 import { Box, Button, Icon, Text } from "@adminjs/design-system";
 import type { EditPropertyProps } from "adminjs";
+import { useTranslation } from "adminjs";
 import React, { FC, SyntheticEvent, useMemo, useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { theme } from "@adminjs/design-system";
@@ -18,6 +19,7 @@ export const QrCodeEdit: FC<QrCodeEditProps> = ({
   record,
   onChange,
 }) => {
+  const { translateProperty } = useTranslation();
   const urlTemplate =
     (property as { custom?: { urlTemplate?: string } }).custom?.urlTemplate ??
     "";
@@ -61,7 +63,7 @@ export const QrCodeEdit: FC<QrCodeEditProps> = ({
     <ThemeProvider theme={theme}>
       <Box mb="lg">
         <Text mb="default" fontWeight="bold">
-          {property.label ?? property.path}
+          {translateProperty(property.label, property.resourceId)}
         </Text>
 
         {!isGenerated && (

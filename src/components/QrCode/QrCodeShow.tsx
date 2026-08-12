@@ -1,5 +1,6 @@
 import { Box, Text } from "@adminjs/design-system";
 import type { ShowPropertyProps } from "adminjs";
+import { useTranslation } from "adminjs";
 import React, { FC, useMemo } from "react";
 import { ThemeProvider } from "styled-components";
 import { theme } from "@adminjs/design-system";
@@ -10,6 +11,7 @@ import { useQrDataUrl } from "./use-qr-data-url.js";
 const NOT_GENERATED_MESSAGE = "QR code has not been generated yet.";
 
 export const QrCodeShow: FC<ShowPropertyProps> = ({ property, record }) => {
+  const { translateProperty } = useTranslation();
   const urlTemplate =
     (property as { custom?: { urlTemplate?: string } }).custom?.urlTemplate ??
     "";
@@ -30,7 +32,7 @@ export const QrCodeShow: FC<ShowPropertyProps> = ({ property, record }) => {
     <ThemeProvider theme={theme}>
       <Box mb="lg">
         <Text mb="default" fontWeight="bold">
-          {property.label ?? property.path}
+          {translateProperty(property.label, property.resourceId)}
         </Text>
 
         {!isGenerated && <Text>{NOT_GENERATED_MESSAGE}</Text>}

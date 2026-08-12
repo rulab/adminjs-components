@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from "react";
 
-import { EditPropertyProps } from "adminjs";
+import { EditPropertyProps, useTranslation } from "adminjs";
 import Select, { MultiValue, SingleValue, StylesConfig } from "react-select";
 import chroma from "chroma-js";
 
@@ -61,6 +61,7 @@ export const ColorStatusEdit: FC<ColorStatusTypes> = ({
   record,
   onChange,
 }) => {
+  const { translateProperty } = useTranslation();
   const availableValues = property.availableValues as SelectAvailableValueType[];
   const nullable = Boolean(
     (property as unknown as { custom?: { nullable?: boolean } }).custom?.nullable,
@@ -89,7 +90,7 @@ export const ColorStatusEdit: FC<ColorStatusTypes> = ({
 
   return (
     <ColorStatusWrapper>
-      <Label>{property.label ?? property.path}</Label>
+      <Label>{translateProperty(property.label, property.resourceId)}</Label>
       <Select
         className="basic-single"
         classNamePrefix="select"

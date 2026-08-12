@@ -1,4 +1,4 @@
-import {EditPropertyProps, flat} from "adminjs";
+import { EditPropertyProps, flat, useTranslation } from "adminjs";
 import React, {
   ChangeEvent,
   FC,
@@ -27,6 +27,7 @@ export const SlugEdit: FC<CustomSlugTypes> = ({
   resource,
   onChange,
 }) => {
+  const { translateProperty } = useTranslation();
   type SlugCustomProperty = {
     source: string;
     key: string;
@@ -46,7 +47,9 @@ export const SlugEdit: FC<CustomSlugTypes> = ({
 
   return (
     <ThemeProvider theme={theme}>
-      <StyledLabel htmlFor="customSlug">{property.label ?? property.path}</StyledLabel>
+      <StyledLabel htmlFor="customSlug">
+        {translateProperty(property.label, property.resourceId)}
+      </StyledLabel>
       <StyledInputWrapper>
         <StyledCustomInput
           id={property.path}

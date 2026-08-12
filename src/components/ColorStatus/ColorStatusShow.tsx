@@ -1,11 +1,12 @@
 import React, { FC } from "react";
-import { ShowPropertyProps } from "adminjs";
+import { ShowPropertyProps, useTranslation } from "adminjs";
 
 import { ColorStatusBadgeWrapper, ColorStatusBadge, ShowLabel } from "./styles.js";
 
 import type { AvailableValueType } from "./types.js";
 
 export const ColorStatusShow: FC<ShowPropertyProps> = ({ property, record }) => {
+  const { translateProperty } = useTranslation();
   const currentOption = property.availableValues?.find(
     (item) => item.value === record.params[property.path],
   ) as AvailableValueType;
@@ -14,7 +15,7 @@ export const ColorStatusShow: FC<ShowPropertyProps> = ({ property, record }) => 
 
   return (
     <ColorStatusBadgeWrapper>
-      <ShowLabel>{property.label ?? property.path}</ShowLabel>
+      <ShowLabel>{translateProperty(property.label, property.resourceId)}</ShowLabel>
       <ColorStatusBadge color={currentOption?.color}>
         {displayValue}
       </ColorStatusBadge>
