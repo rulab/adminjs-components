@@ -1,7 +1,7 @@
 import React, { FC, MouseEvent, useState } from "react";
 import type { ShowPropertyProps } from "adminjs";
 import { useTranslation } from "adminjs";
-import { Box, Text } from "@adminjs/design-system";
+import { Box } from "@adminjs/design-system";
 
 import { StyledListSpoilerToggle } from "./styles.js";
 
@@ -62,8 +62,10 @@ export const StringListList: FC<StringListListProps> = ({
     setExpanded((prev) => !prev);
   };
 
+  // Match AdminJS DefaultPropertyValue: plain text inherits table cell styles.
+  // Do not wrap in <Text> — it applies font-weight: light via contentCSS.
   if (!needsSpoiler) {
-    return <Text>{displayText}</Text>;
+    return <>{displayText}</>;
   }
 
   const expandLabel = translateMessage("stringListExpand", property.resourceId, {
@@ -82,7 +84,7 @@ export const StringListList: FC<StringListListProps> = ({
       onClick={stopRowClick}
       onMouseDown={stopRowClick}
     >
-      <Text as="span">{expanded ? displayText : collapsedText}</Text>
+      {expanded ? displayText : collapsedText}
       <StyledListSpoilerToggle
         type="button"
         onClick={toggle}
